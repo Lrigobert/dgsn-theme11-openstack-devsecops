@@ -1,0 +1,5 @@
+# Surcharge Kolla (/etc/kolla/config/galera.cnf) — dimensionnement lab.
+# Défaut Kolla : innodb_buffer_pool_size = 40 % de la RAM de l'hôte (~4,7 Go sur controller),
+# disproportionné pour quelques centaines de Mo de bases OpenStack.
+[mysqld]
+innodb_buffer_pool_size = 256M

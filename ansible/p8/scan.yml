@@ -1,0 +1,79 @@
+---
+# Phase 8 — évaluation OpenSCAP (profil CIS niveau 1 serveur, Debian 12, SSG 0.1.82).
+# Usage : ansible-playbook -i inventory.ini scan.yml -e etape=avant|apres
+- name: Attente de la joignabilité SSH (démarrage qemu)
+  hosts: scap
+  gather_facts: false
+  tasks:
+    - name: Attendre SSH
+      ansible.builtin.wait_for_connection:
+        delay: 10
+        sleep: 5
+        timeout: 900
+
+- name: Scan OpenSCAP CIS
+  hosts: scap
+  become: true
+  vars:
+    ds: /opt/ssg/ssg-debian12-ds.xml
+    profile: xccdf_org.ssgproject.content_profile_cis_level1_server
+    out: /var/tmp/oscap-{{ etape }}
+  tasks:
+    - name: Attendre SSH et cloud-init
+      ansible.builtin.wait_for:
+        path: /var/lib/dgsn-cloud-init-done
+        timeout: 600
+
+    - name: Scanner OpenSCAP
+      ansible.builtin.apt:
+        name: openscap-scanner
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Répertoire du contenu SSG
+      ansible.builtin.file:
+        path: /opt/ssg
+        state: directory
+        mode: "0755"
+
+    - name: Datastream SSG
+      ansible.builtin.copy:
+        src: "{{ lookup('env', 'HOME') }}/dgsn/ssg/content/ssg-debian12-ds.xml"
+        dest: "{{ ds }}"
+        mode: "0644"
+
+    - name: Évaluation du profil (code 2 = règles en échec, attendu)
+      ansible.builtin.command: >
+        oscap xccdf eval --profile {{ profile }}
+        --results {{ out }}-results.xml --report {{ out }}-report.html {{ ds }}
+      register: scan
+      failed_when: scan.rc not in [0, 2]
+      changed_when: false
+
+    - name: Score et décompte
+      ansible.builtin.shell: |
+        python3 - <<'EOF'
+        import xml.etree.ElementTree as ET
+        ns = {"x": "http://checklists.nist.gov/xccdf/1.2"}
+        r = ET.parse("{{ out }}-results.xml").getroot()
+        tr = r.find(".//x:TestResult", ns)
+        score = float(tr.find("x:score", ns).text)
+        c = {}
+        for rr in tr.findall("x:rule-result", ns):
+            k = rr.find("x:result", ns).text; c[k] = c.get(k, 0) + 1
+        p, f = c.get("pass", 0), c.get("fail", 0)
+        print(f"score={score:.2f} pass={p} fail={f} notapplicable={c.get('notapplicable',0)} notchecked={c.get('notchecked',0)} taux_conformite={100*p/(p+f):.1f}%")
+        EOF
+      register: score
+      changed_when: false
+
+    - name: Afficher
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }} [{{ etape }}] {{ score.stdout }}"
+
+    - name: Rapatrier rapports HTML et résultats
+      ansible.builtin.fetch:
+        src: "{{ out }}-{{ item }}"
+        dest: "{{ lookup('env', 'HOME') }}/dgsn/p8-reports/{{ inventory_hostname }}/"
+        flat: true
+      loop: [report.html, results.xml]

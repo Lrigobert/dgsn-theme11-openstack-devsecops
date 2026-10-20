@@ -1,0 +1,20 @@
+﻿victime : k3s-3 (aa48c365-25f4-4334-997f-027f104d3b90, domaine libvirt instance-00000030)
+arrêt brutal à 2026-10-20T01:37:13+00:00
+Domain 'instance-00000030' destroyed
+
+sondes : 212 (avant arrêt 38, après 174)
+avant arrêt : 38/38 OK, répliques vues : ['dgsn-whoami-579747d57-fv9r2', 'dgsn-whoami-579747d57-g45rm', 'dgsn-whoami-579747d57-jdgwb']
+échecs après arrêt : 1/174 ; 1er échec à +1.7 s ; dernier échec à +1.7 s
+TEMPS DE REPRISE (arrêt -> dernier échec) : 1.7 s
+fin d'observation : 20/20 OK, répliques vues : ['dgsn-whoami-579747d57-fv9r2', 'dgsn-whoami-579747d57-jdgwb']
+--- état du cluster après la panne
+Warning: Permanently added '192.168.100.211' (ED25519) to the list of known hosts.
+NAME    STATUS     ROLES           AGE     VERSION
+k3s-1   Ready      control-plane   12m     v1.37.1+k3s1
+k3s-2   Ready      <none>          6m38s   v1.37.1+k3s1
+k3s-3   NotReady   <none>          11m     v1.37.1+k3s1
+NAME                          READY   STATUS        RESTARTS   AGE     IP          NODE     NOMINATED NODE   READINESS GATES
+dgsn-whoami-579747d57-8lwb4   0/1     Pending       0          100s    <none>      <none>   <none>           <none>
+dgsn-whoami-579747d57-fv9r2   1/1     Running       0          5m11s   10.42.2.2   k3s-2    <none>           <none>
+dgsn-whoami-579747d57-g45rm   1/1     Terminating   0          5m12s   10.42.1.2   k3s-3    <none>           <none>
+dgsn-whoami-579747d57-jdgwb   1/1     Running       0          5m11s   10.42.0.4   k3s-1    <none>           <none>

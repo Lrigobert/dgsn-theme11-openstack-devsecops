@@ -1,0 +1,37 @@
+﻿== Paquets système ==
+== venv + Kolla-Ansible 18.x (= 2024.1 Caracal) ==
+18.8.0
+== /etc/kolla ==
+== Inventaire multinœud ==
+groupes d'inventaire : 181
+== Dépendances Ansible Galaxy (unmaintained/2024.1, voir kolla/requirements.yml) ==
+[WARNING]: Collection community.general does not support Ansible version
+2.16.19
+Cloning into '/home/jacques1/.ansible/tmp/ansible-local-5331rl1hswnj/tmpb60zzpum/ansible-collection-kolla0z53y92_'...
+Switched to a new branch 'unmaintained/2024.1'
+Branch 'unmaintained/2024.1' set up to track remote branch 'unmaintained/2024.1' from 'origin'.
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Installing 'openstack.kolla:1.0.0' to '/home/jacques1/.ansible/collections/ansible_collections/openstack/kolla'
+Created collection for openstack.kolla:1.0.0 at /home/jacques1/.ansible/collections/ansible_collections/openstack/kolla
+openstack.kolla:1.0.0 was installed successfully
+== Clé SSH VM1 -> controller ==
+Generating public/private ed25519 key pair.
+Your identification has been saved in /home/jacques1/.ssh/id_ed25519
+Your public key has been saved in /home/jacques1/.ssh/id_ed25519.pub
+The key fingerprint is:
+SHA256:FsPrRcsQpZA8sLsc10g1OdjSozGy9VTAEbudduZS6H4 jacques1@vm1-deploy
+The key's randomart image is:
++--[ED25519 256]--+
+|    .o.*BBo      |
+|    ..X+O=       |
+|    .+.OBo.      |
+|    .o.o.X +     |
+|    o o S O +    |
+|   . + o + =     |
+|    o   . o .    |
+|         . .E    |
+|          ..     |
++----[SHA256]-----+
+P2_SETUP_OK

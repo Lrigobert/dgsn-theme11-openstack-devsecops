@@ -1,0 +1,18 @@
+﻿Certificate request self-signature ok
+subject=C = MA, O = DGSN Lab Theme11, CN = openstack.dgsn.lab
+openstack : certificat émis
+Certificate request self-signature ok
+subject=C = MA, O = DGSN Lab Theme11, CN = vault.dgsn.lab
+vault : certificat émis
+openstack.crt: OK
+subject=C = MA, O = DGSN Lab Theme11, CN = openstack.dgsn.lab notAfter=Nov 19 23:07:56 2027 GMT X509v3 Subject Alternative Name:      DNS:openstack.dgsn.lab, IP Address:192.168.100.45, IP Address:192.168.100.40 
+vault.crt: OK
+subject=C = MA, O = DGSN Lab Theme11, CN = vault.dgsn.lab notAfter=Nov 19 23:07:56 2027 GMT X509v3 Subject Alternative Name:      DNS:vault.dgsn.lab, DNS:gitlab.dgsn.lab, IP Address:192.168.100.50, IP Address:127.0.0.1 
+total 24
+-rw------- 1 jacques1 jacques1 306 oct.  18 23:07 ca.key
+-rw-rw-r-- 1 jacques1 jacques1 863 oct.  18 23:07 dgsn-root-ca.crt
+-rw-rw-r-- 1 jacques1 jacques1 883 oct.  18 23:07 openstack.crt
+-rw------- 1 jacques1 jacques1 241 oct.  18 23:07 openstack.key
+-rw-rw-r-- 1 jacques1 jacques1 895 oct.  18 23:07 vault.crt
+-rw------- 1 jacques1 jacques1 241 oct.  18 23:07 vault.key
+P6_PKI_OK

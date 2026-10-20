@@ -1,0 +1,12 @@
+﻿Warning: Permanently added '192.168.100.211' (ED25519) to the list of known hosts.
+deployment.apps/dgsn-whoami created
+service/dgsn-whoami created
+Warning: Permanently added '192.168.100.211' (ED25519) to the list of known hosts.
+Waiting for deployment "dgsn-whoami" rollout to finish: 0 of 3 updated replicas are available...
+Waiting for deployment "dgsn-whoami" rollout to finish: 1 of 3 updated replicas are available...
+Waiting for deployment "dgsn-whoami" rollout to finish: 2 of 3 updated replicas are available...
+deployment "dgsn-whoami" successfully rolled out
+NAME                          READY   STATUS    RESTARTS   AGE   IP          NODE    NOMINATED NODE   READINESS GATES
+dgsn-whoami-579747d57-fv9r2   1/1     Running   0          48s   10.42.2.2   k3s-2   <none>           <none>
+dgsn-whoami-579747d57-g45rm   1/1     Running   0          49s   10.42.1.2   k3s-3   <none>           <none>
+dgsn-whoami-579747d57-jdgwb   1/1     Running   0          48s   10.42.0.4   k3s-1   <none>           <none>

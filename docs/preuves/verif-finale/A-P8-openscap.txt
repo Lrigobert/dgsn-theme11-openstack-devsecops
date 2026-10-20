@@ -1,0 +1,7 @@
+﻿}
+"msg": "scap-1 [verif] score=67.90 pass=223 fail=108 notapplicable=66 notchecked=6 taux_conformite=67.4%"
+"msg": "scap-2 [verif] score=67.90 pass=223 fail=108 notapplicable=66 notchecked=6 taux_conformite=67.4%"
+scap-2                     : ok=10   changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Destroy complete! Resources: 14 destroyed.
+P8_VERIF_PASS

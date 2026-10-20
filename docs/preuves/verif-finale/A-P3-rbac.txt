@@ -1,0 +1,12 @@
+﻿== reader (dgsn-id-reader sur dgsn-identification) ==
+PASS  reader peut lister les instances de son projet
+  -> ForbiddenException: 403: Client Error for url: https://192.168.100.45:8774/v2.1/servers, Policy doesn't allow os_compute_api:servers:create to be performed.
+PASS  reader NE PEUT PAS créer d'instance (refus 403 prouvé)
+PASS  reader NE PEUT PAS créer de réseau (ForbiddenException: 403: Client Error for url: https://192.168.100.45:9696/v2.0/networks, )
+== member (dgsn-pj-member sur dgsn-pj) ==
+PASS  member peut créer un réseau dans son projet
+PASS  member NE PEUT PAS accéder au projet dgsn-identification (The request you have made requires authentication. (HTTP 401) (Request-ID: req-6d873c0c-0d)
+PASS  member NE PEUT PAS lister les utilisateurs (action admin refusée)
+== admin (dgsn-ops-admin sur dgsn-ops) ==
+PASS  admin peut administrer (liste des projets)
+P3_TEST_PASS

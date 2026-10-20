@@ -1,0 +1,4 @@
+﻿"msg": "scap-1 [apres] score=90.04 pass=315 fail=31 notapplicable=52 notchecked=5 taux_conformite=91.0%"
+"msg": "scap-2 [apres] score=90.04 pass=315 fail=31 notapplicable=52 notchecked=5 taux_conformite=91.0%"
+"msg": "scap-1 [avant] score=67.90 pass=223 fail=108 notapplicable=66 notchecked=6 taux_conformite=67.4%"
+"msg": "scap-2 [avant] score=67.90 pass=223 fail=108 notapplicable=66 notchecked=6 taux_conformite=67.4%"

@@ -1,0 +1,20 @@
+﻿Certificate request self-signature ok
+subject=C = MA, O = DGSN Lab Theme11, CN = node-controller.dgsn.lab
+Certificate request self-signature ok
+subject=C = MA, O = DGSN Lab Theme11, CN = node-app.dgsn.lab
+Certificate request self-signature ok
+subject=C = MA, O = DGSN Lab Theme11, CN = prometheus.dgsn.lab
+No extensions in certificate
+openstack : certificat valide conservé
+vault : certificat valide conservé
+node-controller : certificat émis
+node-app : certificat émis
+prometheus-client : certificat client émis
+openstack.crt: OK
+vault.crt: OK
+node-controller.crt: OK
+node-app.crt: OK
+prometheus-client.crt: OK
+P6_PKI_OK
+X509v3 Extended Key Usage: 
+    TLS Web Client Authentication

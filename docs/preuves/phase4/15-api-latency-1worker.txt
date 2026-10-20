@@ -1,0 +1,5 @@
+﻿keystone   moyenne 9 ms sur 10 appels
+nova       moyenne 19 ms sur 10 appels
+neutron    moyenne 19 ms sur 10 appels
+glance     moyenne 5 ms sur 10 appels
+placement  moyenne 5 ms sur 10 appels

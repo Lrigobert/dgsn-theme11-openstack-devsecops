@@ -1,0 +1,41 @@
+﻿== Services Keystone ==
+glance image
+heat-cfn cloudformation
+heat orchestration
+keystone identity
+neutron network
+nova compute
+placement placement
+PASS  service keystone enregistré
+PASS  service glance enregistré
+PASS  service nova enregistré
+PASS  service neutron enregistré
+PASS  service placement enregistré
+nova-compute up
+nova-conductor up
+nova-scheduler up
+True neutron-dhcp-agent
+True neutron-l3-agent
+True neutron-metadata-agent
+True neutron-openvswitch-agent
+== Horizon (VIP 192.168.100.45) ==
+PASS  Horizon HTTP 200
+== Réseaux ==
+PASS  demo-net type vxlan
+PASS  public1 type flat (externe)
+== Groupe de sécurité (22, 8080, ICMP autorisés ; 8081 non) ==
+None  egress
+tcp 22:22 ingress
+icmp  ingress
+tcp 8080:8080 ingress
+None  egress
+== Instance cirros ==
+création + ACTIVE en 18 s
+PASS  instance p2-test-cirros ACTIVE
+IP flottante : 192.168.100.201
+PASS  ping 192.168.100.201 depuis VM1 (après ~10 s)
+PASS  TCP 22 autorisé : ouvert
+PASS  TCP 8080 autorisé : ouvert
+PASS  TCP 8081 non autorisé : bloqué (timeout)
+PASS  TCP 8081 joignable après ajout de la règle (contre-preuve)
+P2_TEST_PASS

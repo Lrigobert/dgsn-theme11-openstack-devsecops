@@ -1,0 +1,42 @@
+﻿panneaux de données : 16, requêtes : 28
+{
+  "commit": "6e6fbf6a3418cc5acdc13a79bc2f440218c22e5f",
+  "database": "ok",
+  "version": "10.4.3"
+}
+oct. 19 18:54:39 serveur4 grafana[71523]: logger=provisioning.alerting t=2026-10-19T18:54:39.956483314Z level=info msg="starting to provision alerting"
+oct. 19 18:54:39 serveur4 grafana[71523]: logger=provisioning.alerting t=2026-10-19T18:54:39.956532609Z level=info msg="finished to provision alerting"
+oct. 19 18:54:39 serveur4 grafana[71523]: logger=provisioning.dashboard t=2026-10-19T18:54:39.990964483Z level=info msg="starting to provision dashboards"
+oct. 19 18:54:39 serveur4 grafana[71523]: logger=folder-service t=2026-10-19T18:54:39.993069714Z level=warn msg="failed to parse user ID" namespaceID=user userID=0 error="identifier is not initialized
+oct. 19 18:54:40 serveur4 grafana[71523]: logger=provisioning.dashboard t=2026-10-19T18:54:40.017732486Z level=info msg="finished to provision dashboards"
+== Requêtes du dashboard évaluées dans Prometheus (preuve des métriques) ==
+OK  Services OpenStack disponibles (1 = up)       Nova           Nova=1.0
+OK  Services OpenStack disponibles (1 = up)       Neutron        Neutron=1.0
+OK  Services OpenStack disponibles (1 = up)       Glance         Glance=1.0
+OK  Services OpenStack disponibles (1 = up)       Keystone       Keystone=1.0
+OK  Services OpenStack disponibles (1 = up)       Placement      Placement=1.0
+OK  Agents Nova up                                up             up=3.0
+OK  Agents Nova up                                total          total=3.0
+OK  Agents Neutron vivants                        vivants        vivants=4.0
+OK  Agents Neutron vivants                        total          total=4.0
+OK  Projets / utilisateurs Keystone               projets        projets=5.0
+OK  Projets / utilisateurs Keystone               utilisateurs   utilisateurs=8.0
+OK  Instances (total / ACTIVE)                    total          total=1.0
+OK  Instances (total / ACTIVE)                    ACTIVE         ACTIVE=1.0
+OK  vCPU utilisés (somme des projets)             vCPU           vCPU=1.0
+OK  RAM réservée par les instances                RAM            RAM=1073741824.0
+OK  IP flottantes (allouées)                      IP flottantes  IP flottantes=1.0
+OK  Images Glance                                 images         images=2.0
+OK  Réseaux / routeurs / groupes de sécurité      réseaux        réseaux=3.0
+OK  Réseaux / routeurs / groupes de sécurité      routeurs       routeurs=2.0
+OK  Réseaux / routeurs / groupes de sécurité      secgroups      secgroups=6.0
+OK  Placement : utilisation vs capacité (controll {{resourcetype MEMORY_MB=1024.0, VCPU=1.0
+OK  Placement : utilisation vs capacité (controll {{resourcetype MEMORY_MB=9897.0, VCPU=8.0
+OK  CPU utilisé (%)                               {{vm}}         VM1-Ansible=0.2, dgsn-app-1=4.9, VM4-Monitoring=1.0, controller=8.3
+OK  Mémoire utilisée (%)                          {{vm}}         VM1-Ansible=28.0, dgsn-app-1=40.9, VM4-Monitoring=23.8, controller=69.2
+OK  Disque / utilisé (%)                          {{vm}}         VM1-Ansible=58.5, VM4-Monitoring=70.8, controller=23.4, dgsn-app-1=24.5
+OK  Réseau (octets/s, réception + émission)       {{vm}} rx      VM4-Monitoring=6949.8, controller=10097.0, dgsn-app-1=38.9, VM1-Ansible=103.5
+OK  Réseau (octets/s, réception + émission)       {{vm}} tx      VM4-Monitoring=-1090.0, controller=-7410.1, dgsn-app-1=-1006.1, VM1-Ansible=-781.7
+OK  Charge système (load 1 min)                   {{vm}}         VM1-Ansible=0.0, dgsn-app-1=0.0, VM4-Monitoring=0.0, controller=0.6
+
+requêtes avec données : 28/28

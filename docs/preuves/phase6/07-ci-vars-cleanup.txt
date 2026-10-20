@@ -1,0 +1,3 @@
+﻿suppression DEPLOY_SSH_KEY : HTTP 204
+variables CI restantes :
+ - APP_HOST env_var

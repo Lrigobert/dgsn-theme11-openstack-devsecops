@@ -1,0 +1,7 @@
+﻿ci-demo-app
+[{'id': '7368f1bfa9b6402ca2b43b259acf8f0a', 'name': 'reader', 'domain_id': None, 'description': None, 'options': {'immutable': True}}, {'id': '882b6f72a0034ffbafadb41954414ac1', 'name': 'member', 'domain_id': None, 'description': None, 'options': {'immutable': True}}]
+False
+2026-11-17T23:30:12.000000
+P6_APPCRED_OK (secret écrit dans /tmp/ac.json, jamais affiché)
+clés stockées : application_credential_id,application_credential_secret,expires_at,project
+fichier source détruit : oui

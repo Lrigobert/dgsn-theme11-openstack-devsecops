@@ -1,0 +1,26 @@
+# --- Secrets ---
+*.key
+*-key.pem
+*key*.pem
+id_rsa*
+id_ed25519*
+passwords.yml
+*openrc*
+.env
+secrets/
+**/secrets/
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+# --- Fichiers lourds / temporaires ---
+*.vmdk
+*.iso
+*.img
+*.qcow2
+venv/
+.venv/
+node_modules/
+__pycache__/
+*.pyc

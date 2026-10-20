@@ -1,0 +1,33 @@
+---
+# KSM (Kernel Samepage Merging) sur les nœuds compute : déduplication des pages mémoire
+# identiques entre instances qemu (même image Debian). QEMU marque la RAM des invités
+# MADV_MERGEABLE par défaut (mem-merge=on). Usage depuis VM1 :
+#   ansible-playbook -i 192.168.100.40, -u jacques1 ansible/ksm.yml
+- name: Activer KSM de façon persistante
+  hosts: all
+  become: true
+  vars:
+    ksm_pages_to_scan: 1000      # défaut noyau : 100
+    ksm_sleep_millisecs: 50      # défaut noyau : 20 ; compromis CPU / vitesse de fusion
+  tasks:
+    - name: Paramètres KSM appliqués à chaque démarrage (tmpfiles.d)
+      ansible.builtin.copy:
+        dest: /etc/tmpfiles.d/dgsn-ksm.conf
+        mode: "0644"
+        content: |
+          w /sys/kernel/mm/ksm/pages_to_scan - - - - {{ ksm_pages_to_scan }}
+          w /sys/kernel/mm/ksm/sleep_millisecs - - - - {{ ksm_sleep_millisecs }}
+          w /sys/kernel/mm/ksm/run - - - - 1
+
+    - name: Appliquer immédiatement
+      ansible.builtin.command: systemd-tmpfiles --create /etc/tmpfiles.d/dgsn-ksm.conf
+      changed_when: true
+
+    - name: État KSM
+      ansible.builtin.command: cat /sys/kernel/mm/ksm/run /sys/kernel/mm/ksm/pages_to_scan /sys/kernel/mm/ksm/sleep_millisecs
+      register: ksm
+      changed_when: false
+
+    - name: Afficher
+      ansible.builtin.debug:
+        msg: "run={{ ksm.stdout_lines[0] }} pages_to_scan={{ ksm.stdout_lines[1] }} sleep_ms={{ ksm.stdout_lines[2] }}"

@@ -1,0 +1,8 @@
+---
+# Collection Ansible Kolla pour OpenStack 2025.1 Epoxy (branche maintenue).
+# Les collections « core » (ansible.posix, community.docker…) viennent du
+# requirements-core.yml fourni par kolla-ansible 20.x (versions bornées).
+collections:
+  - name: https://opendev.org/openstack/ansible-collection-kolla
+    type: git
+    version: stable/2025.1

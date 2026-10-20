@@ -1,0 +1,109 @@
+---
+# Phase 4 — configuration des 5 instances après terraform apply.
+# Volontairement sans installation de paquets (qemu sans accélération + 512 Mo) :
+# durcissement SSH/système commun et services applicatifs de démonstration en Python.
+
+- name: Attente de la joignabilité SSH (démarrage qemu)
+  hosts: bastion:web:app:db
+  gather_facts: false
+  tasks:
+    - name: Attendre SSH (via le bastion pour les hôtes privés)
+      ansible.builtin.wait_for_connection:
+        delay: 10
+        sleep: 5
+        timeout: 600
+
+- name: Socle commun DGSN
+  hosts: all
+  become: true
+  tasks:
+    - name: Attendre la fin de cloud-init
+      ansible.builtin.wait_for:
+        path: /var/lib/dgsn-cloud-init-done
+        timeout: 300
+
+    - name: Bannière légale
+      ansible.builtin.copy:
+        dest: /etc/issue.net
+        content: |
+          Système d'information de la DGSN — accès réservé aux personnes autorisées.
+          Toute connexion est journalisée.
+        mode: "0644"
+
+    - name: Durcissement SSH complémentaire
+      ansible.builtin.copy:
+        dest: /etc/ssh/sshd_config.d/20-dgsn-ansible.conf
+        content: |
+          Banner /etc/issue.net
+          X11Forwarding no
+          AllowTcpForwarding {{ 'yes' if 'bastion' in group_names else 'no' }}
+          ClientAliveInterval 300
+          ClientAliveCountMax 2
+          LoginGraceTime 30
+        mode: "0644"
+        validate: /usr/sbin/sshd -t -f %s
+      notify: Recharger ssh
+
+    - name: Paramètres noyau réseau (sysctl)
+      ansible.posix.sysctl:
+        name: "{{ item.k }}"
+        value: "{{ item.v }}"
+        sysctl_file: /etc/sysctl.d/90-dgsn.conf
+        reload: true
+      loop:
+        - { k: net.ipv4.conf.all.accept_redirects, v: "0" }
+        - { k: net.ipv4.conf.all.send_redirects, v: "0" }
+        - { k: net.ipv4.conf.all.log_martians, v: "1" }
+        - { k: net.ipv4.tcp_syncookies, v: "1" }
+        - { k: kernel.kptr_restrict, v: "2" }
+
+  handlers:
+    - name: Recharger ssh
+      ansible.builtin.service:
+        name: ssh
+        state: reloaded
+
+- name: Services applicatifs de démonstration
+  hosts: web:app
+  become: true
+  vars:
+    port: "{{ 80 if 'web' in group_names else 8080 }}"
+  tasks:
+    - name: Répertoire du site
+      ansible.builtin.file:
+        path: /srv/dgsn
+        state: directory
+        mode: "0755"
+
+    - name: Page de test
+      ansible.builtin.copy:
+        dest: /srv/dgsn/index.html
+        content: "DGSN Theme11 - {{ inventory_hostname }} ({{ group_names | join(',') }})\n"
+        mode: "0644"
+
+    - name: Service systemd confiné
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/dgsn-demo.service
+        content: |
+          [Unit]
+          Description=Service de démonstration DGSN ({{ inventory_hostname }})
+          After=network-online.target
+          [Service]
+          ExecStart=/usr/bin/python3 -m http.server {{ port }} --directory /srv/dgsn
+          DynamicUser=yes
+          AmbientCapabilities=CAP_NET_BIND_SERVICE
+          NoNewPrivileges=yes
+          ProtectSystem=strict
+          ProtectHome=yes
+          PrivateTmp=yes
+          Restart=on-failure
+          [Install]
+          WantedBy=multi-user.target
+        mode: "0644"
+
+    - name: Démarrer le service
+      ansible.builtin.systemd:
+        name: dgsn-demo
+        enabled: true
+        state: restarted
+        daemon_reload: true

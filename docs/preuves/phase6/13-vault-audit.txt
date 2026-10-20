@@ -1,0 +1,5 @@
+﻿   2  lecture demo-app/deploy-ssh
+   5  lecture demo-app/openstack
+   1  login JWT REFUSÉ
+   2  login JWT accepté
+valeurs sensibles hachées (hmac-sha256) dans l'audit : 55 entrées

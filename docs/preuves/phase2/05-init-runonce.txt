@@ -1,0 +1,30 @@
+﻿| vcpus                      | 8         |
++----------------------------+-----------+
++----------------------------+---------+
+| Field                      | Value   |
++----------------------------+---------+
+| OS-FLV-DISABLED:disabled   | False   |
+| OS-FLV-EXT-DATA:ephemeral  | 0       |
+| description                | None    |
+| disk                       | 1       |
+| id                         | 6       |
+| name                       | m2.tiny |
+| os-flavor-access:is_public | True    |
+| properties                 |         |
+| ram                        | 512     |
+| rxtx_factor                | 1.0     |
+| swap                       | 0       |
+| vcpus                      | 2       |
++----------------------------+---------+
+
+Done.
+
+To deploy a demo instance, run:
+
+openstack --os-cloud=kolla-admin server create \
+    --image cirros \
+    --flavor m1.tiny \
+    --key-name mykey \
+    --network demo-net \
+    demo1
+P2_INIT_OK

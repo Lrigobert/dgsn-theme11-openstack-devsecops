@@ -1,0 +1,6 @@
+﻿audit   : file/
+secrets : agent-registry/,cubbyhole/,identity/,kv/,sys/
+auth    : jwt/,token/
+{"bound_claims":{"project_path":"dgsn/demo-app","ref":"main","ref_protected":"true","ref_type":"branch"},"bound_audiences":["https://vault.dgsn.lab"],"token_policies":["ci-demo-app"],"token_ttl":600}
+secrets CI : deploy-ssh
+P6_VAULT_CONFIG_OK

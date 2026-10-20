@@ -1,0 +1,19 @@
+﻿runners dans config.toml : 0
+runners restants côté GitLab : 0
+PAT OK pour root
+== Runner Docker (exécuteur docker, socket hôte, concurrence 1) ==
+dgsn-docker                                       [0;m  Executor[0;m=docker Token=[SECRET] URL[0;m=http://192.168.100.50
+concurrent = 1
+P5_CI_SETUP_OK
+sed: -e expression #1, char 11: unterminated address regex
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>
+BrokenPipeError: [Errno 32] Broken pipe
+2 dgsn-docker online online=True
+active
+                                                  [0;m 
+Verifying runner... is valid                      [0;m  correlation_id[0;m=01M58KYA0CB0WH8CRJVY6ZM9PD runner[0;m=D0x0q-T8p runner_name[0;m=dgsn-docker
+  url = "http://192.168.100.50"
+  executor = "docker"
+    image = "alpine:3.20"
+    network_mode = "host"
+    pull_policy = ["if-not-present"]

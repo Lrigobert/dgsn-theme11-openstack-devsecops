@@ -1,0 +1,36 @@
+﻿dÃ©marrage gitlab : 2026-10-20 02:12:21
+--- Vault (attendu : scellÃ© aprÃ¨s redÃ©marrage, puis descellÃ© par le script)
+{"sealed":true}
+{"sealed":false,"version":"2.2.0","storage_type":"raft"}
+GitLab HTTP 200 aprÃ¨s 15 s
+is valid
+--- Pipeline complet (main, Vault)
+commit fd2d728a1afe8a38a8b74751e7de210cdcbe25c8 poussé (v2-corrige)
+pipeline 8
+PIPELINE 8 statut=success durée=52s file+exécution=1s
+  job semgrep-sast       success     17s
+  job trivy-fs-sca       success      2s
+  job build-image        success      3s
+  job trivy-image        success      2s
+  job push-registry      success      2s
+  job openstack-preflight success      4s
+  job deploy-openstack   success     20s
+rapports : /home/jacques1/dgsn/p5-reports/v2-corrige
+build-image.log
+deploy-openstack.log
+openstack-preflight.log
+push-registry.log
+semgrep.json
+semgrep-sast.log
+trivy-fs.json
+trivy-fs-sca.log
+trivy-image.json
+trivy-image.log
+--- recherche de secrets dans les journaux :
+secret d'application credential : 0 occurrence(s) ; jeton Vault (hvs.) : 0 ; clé privée SSH : 0
+AUCUN_SECRET_DANS_LES_JOURNAUX
+PASS  192.168.100.50:8200 TLS vérifié (TLSv1.3, CN=vault.dgsn.lab)
+P6_TLS_PASS
+{"status":"ok","version":"2"}
+
+VERIF_B2_DONE

@@ -1,0 +1,3 @@
+﻿terraform destroy : 12 s (Destroy complete! Resources: 33 destroyed.)
+PASS  0 instance restante
+P4_DESTROY_PASS

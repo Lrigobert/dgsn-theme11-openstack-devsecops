@@ -1,0 +1,2 @@
+﻿terraform destroy : 14 s (Destroy complete! Resources: 33 destroyed.)
+FAIL  1 instances restantes

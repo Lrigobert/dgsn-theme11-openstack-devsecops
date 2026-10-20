@@ -1,0 +1,13 @@
+﻿22:40:34 hote=2,4Go vmx_controller=13,6Go controller_dispo=7129Mo ksm=0Mo
+22:40:50 hote=2,9Go vmx_controller=13,6Go controller_dispo=6833Mo ksm=12Mo
+22:41:05 hote=3,1Go vmx_controller=13,8Go controller_dispo=4114Mo ksm=86Mo
+22:41:21 hote=3,0Go vmx_controller=13,9Go controller_dispo=2800Mo ksm=328Mo
+22:41:37 hote=2,7Go vmx_controller=14,0Go controller_dispo=2670Mo ksm=610Mo
+22:41:53 hote=2,7Go vmx_controller=14,0Go controller_dispo=1850Mo ksm=726Mo
+22:42:09 hote=2,3Go vmx_controller=14,2Go controller_dispo=691Mo ksm=747Mo
+22:42:25 hote=2,3Go vmx_controller=14,4Go controller_dispo=1017Mo ksm=767Mo
+22:42:41 hote=2,6Go vmx_controller=14,4Go controller_dispo=729Mo ksm=810Mo
+22:42:57 hote=2,4Go vmx_controller=14,6Go controller_dispo=716Mo ksm=870Mo
+22:43:15 hote=1,4Go vmx_controller=14,4Go controller_dispo=1122Mo ksm=884Mo
+ALERTE hote 1,4 Go < seuil 2 Go : interruption + repli
+MIN hote 1,4 Go (seuil 2 Go)

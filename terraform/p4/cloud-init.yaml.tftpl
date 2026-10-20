@@ -1,0 +1,20 @@
+#cloud-config
+# Configuration initiale minimale (le reste est fait par Ansible) — pas de mise à jour
+# de paquets ici pour tenir le temps de démarrage sous qemu.
+hostname: ${hostname}
+fqdn: ${hostname}.dgsn.lab
+timezone: Africa/Casablanca
+package_update: false
+ssh_pwauth: false
+disable_root: true
+write_files:
+  - path: /etc/dgsn-role
+    content: "${role}\n"
+  - path: /etc/ssh/sshd_config.d/10-dgsn.conf
+    content: |
+      PasswordAuthentication no
+      PermitRootLogin no
+      MaxAuthTries 3
+runcmd:
+  - [ systemctl, restart, ssh ]
+  - [ sh, -c, 'date -Is > /var/lib/dgsn-cloud-init-done' ]

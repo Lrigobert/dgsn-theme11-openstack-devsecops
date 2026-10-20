@@ -1,0 +1,51 @@
+﻿== Paquets système ==
+== venv + Kolla-Ansible 20.x (= 2025.1 Epoxy) ==
+venv existant d'une autre série : recréation
+Name: kolla-ansible
+Version: 20.6.0
+Name: ansible-core
+Version: 2.17.14
+== /etc/kolla ==
+WARNING: Passwords file "/etc/kolla/passwords.yml" is world-readable. The permissions will be changed.
+passwords.yml généré pour 2025.1 (reste sur VM1, jamais copié dans le dépôt)
+== Inventaire multinœud ==
+groupes d'inventaire : 178
+== Collections Ansible (core bornées + kolla stable/2025.1) ==
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/ansible-posix-1.6.2.tar.gz to /home/jacques1/.ansible/tmp/ansible-local-95426t885od8/tmpzyqdqoyp/ansible-posix-1.6.2-8eok12ew
+Installing 'ansible.posix:1.6.2' to '/home/jacques1/.ansible/collections/ansible_collections/ansible/posix'
+ansible.posix:1.6.2 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/ansible-utils-5.1.2.tar.gz to /home/jacques1/.ansible/tmp/ansible-local-95426t885od8/tmpzyqdqoyp/ansible-utils-5.1.2-9jbvlygh
+Installing 'ansible.utils:5.1.2' to '/home/jacques1/.ansible/collections/ansible_collections/ansible/utils'
+ansible.utils:5.1.2 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/ansible-netcommon-7.2.0.tar.gz to /home/jacques1/.ansible/tmp/ansible-local-95426t885od8/tmpzyqdqoyp/ansible-netcommon-7.2.0-a3rnv8kr
+Installing 'ansible.netcommon:7.2.0' to '/home/jacques1/.ansible/collections/ansible_collections/ansible/netcommon'
+ansible.netcommon:7.2.0 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/containers-podman-1.21.1.tar.gz to /home/jacques1/.ansible/tmp/ansible-local-95426t885od8/tmpzyqdqoyp/containers-podman-1.21.1-jhf26vs9
+Installing 'containers.podman:1.21.1' to '/home/jacques1/.ansible/collections/ansible_collections/containers/podman'
+containers.podman:1.21.1 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-crypto-2.26.9.tar.gz to /home/jacques1/.ansible/tmp/ansible-local-95426t885od8/tmpzyqdqoyp/community-crypto-2.26.9-7ilxeuyd
+Installing 'community.crypto:2.26.9' to '/home/jacques1/.ansible/collections/ansible_collections/community/crypto'
+community.crypto:2.26.9 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-docker-4.8.9.tar.gz to /home/jacques1/.ansible/tmp/ansible-local-95426t885od8/tmpzyqdqoyp/community-docker-4.8.9-ekn44ul8
+Installing 'community.docker:4.8.9' to '/home/jacques1/.ansible/collections/ansible_collections/community/docker'
+community.docker:4.8.9 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-library_inventory_filtering_v1-1.1.5.tar.gz to /home/jacques1/.ansible/tmp/ansible-local-95426t885od8/tmpzyqdqoyp/community-library_inventory_filtering_v1-1.1.5-v8g5fe2d
+Installing 'community.library_inventory_filtering_v1:1.1.5' to '/home/jacques1/.ansible/collections/ansible_collections/community/library_inventory_filtering_v1'
+community.library_inventory_filtering_v1:1.1.5 was installed successfully
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/community-general-10.7.9.tar.gz to /home/jacques1/.ansible/tmp/ansible-local-95426t885od8/tmpzyqdqoyp/community-general-10.7.9-vj57r_nl
+Installing 'community.general:10.7.9' to '/home/jacques1/.ansible/collections/ansible_collections/community/general'
+community.general:10.7.9 was installed successfully
+Cloning into '/home/jacques1/.ansible/tmp/ansible-local-9544ozy39xsg/tmpwa748340/ansible-collection-kollald6h0vib'...
+Branch 'stable/2025.1' set up to track remote branch 'stable/2025.1' from 'origin'.
+Switched to a new branch 'stable/2025.1'
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Installing 'openstack.kolla:1.0.0' to '/home/jacques1/.ansible/collections/ansible_collections/openstack/kolla'
+Created collection for openstack.kolla:1.0.0 at /home/jacques1/.ansible/collections/ansible_collections/openstack/kolla
+openstack.kolla:1.0.0 was installed successfully
+== Clé SSH VM1 -> controller ==
+P2_SETUP_OK

@@ -1,0 +1,4 @@
+﻿variable APP_HOST (env_var, protégée=false) définie
+variable DEPLOY_SSH_KEY (file, protégée=true) définie
+ - APP_HOST env_var 
+ - DEPLOY_SSH_KEY file protected

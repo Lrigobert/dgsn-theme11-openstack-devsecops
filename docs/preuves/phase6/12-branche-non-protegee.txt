@@ -1,0 +1,13 @@
+﻿remote: 
+remote: To create a merge request for feature/test-vault, visit:        
+remote:   http://192.168.100.50/dgsn/demo-app/-/merge_requests/new?merge_request%5Bsource_branch%5D=feature%2Ftest-vault        
+remote: 
+pipeline 6 sur feature/test-vault : failed
+  job semgrep-sast         success
+  job trivy-fs-sca         success
+  job build-image          success
+  job trivy-image          success
+  job push-registry        success
+  job openstack-preflight  failed
+--- extrait du job openstack-preflight :
+Vault : connexion REFUSÉE (HTTP 400) : ["error validating claims: claim \"ref\" does not match any associated bound claim values"]

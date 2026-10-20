@@ -1,0 +1,118 @@
+# Pipeline DevSecOps DGSN (Thème 11) : SAST -> SCA -> build -> scan image -> push -> déploiement OpenStack.
+# Toute vulnérabilité HIGH/CRITICAL ou tout finding Semgrep bloque la suite (security gate).
+variables:
+  # Outils épinglés (versions vérifiées sur Docker Hub le 2026-10-18) : pas de "latest" en CI
+  SEMGREP_IMAGE: "semgrep/semgrep:1.181.0"
+  TRIVY_IMAGE: "aquasec/trivy:0.76.0"
+  DOCKER_CLI_IMAGE: "docker:29.9.1-cli"
+  IMAGE: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+  TRIVY_CACHE_DIR: "/cache/trivy"
+  TRIVY_NO_PROGRESS: "true"
+  # Phase 6 : secrets servis par Vault (auth JWT GitLab), aucun secret en variable CI
+  VAULT_ADDR: "https://192.168.100.50:8200"
+  VAULT_ROLE: "ci-demo-app"
+  OS_AUTH_URL: "https://192.168.100.45:5000/v3"
+  CA_FILE: "dgsn-root-ca.crt"        # certificat public de la CA interne DGSN (versionné)
+
+stages: [sast, sca, build, scan, push, preflight, deploy]
+
+# Connexion à Vault avec le jeton OIDC du job (audience Vault) ; le jeton Vault n'est jamais affiché
+.vault-login: &vault-login
+  - apk add --no-cache curl jq openssh-client >/dev/null
+  - |
+    resp=$(curl -s --cacert "$CA_FILE" -w '\n%{http_code}' -X POST "$VAULT_ADDR/v1/auth/jwt/login" \
+      -d "{\"role\":\"$VAULT_ROLE\",\"jwt\":\"$VAULT_ID_TOKEN\"}")
+    code=$(echo "$resp" | tail -1)
+    if [ "$code" != 200 ]; then
+      echo "Vault : connexion REFUSÉE (HTTP $code) : $(echo "$resp" | head -1 | jq -c .errors)"; exit 1
+    fi
+    export VAULT_TOKEN=$(echo "$resp" | head -1 | jq -r .auth.client_token)
+    echo "Vault : connexion acceptée (politiques : $(echo "$resp" | head -1 | jq -c .auth.policies))"
+  - |
+    vget() { curl -sf --cacert "$CA_FILE" -H "X-Vault-Token: $VAULT_TOKEN" "$VAULT_ADDR/v1/kv/data/ci/demo-app/$1" | jq -r ".data.data.$2"; }
+
+semgrep-sast:
+  stage: sast
+  image: $SEMGREP_IMAGE
+  script:
+    - semgrep scan --config p/python --config p/flask --metrics=off --error --json -o semgrep.json . || RC=$?
+    - semgrep scan --config p/python --config p/flask --metrics=off --text -q . || true
+    - exit ${RC:-0}
+  artifacts:
+    when: always
+    paths: [semgrep.json]
+    expire_in: 30 days
+
+trivy-fs-sca:
+  stage: sca
+  image: { name: $TRIVY_IMAGE, entrypoint: [""] }
+  script:
+    - trivy fs --scanners vuln --severity HIGH,CRITICAL --format json -o trivy-fs.json .
+    - trivy fs --scanners vuln --severity HIGH,CRITICAL --exit-code 1 .
+  artifacts:
+    when: always
+    paths: [trivy-fs.json]
+    expire_in: 30 days
+
+build-image:
+  stage: build
+  image: $DOCKER_CLI_IMAGE
+  script:
+    - docker build --pull -t "$IMAGE" .
+
+trivy-image:
+  stage: scan
+  image: { name: $TRIVY_IMAGE, entrypoint: [""] }
+  script:
+    - trivy image --severity HIGH,CRITICAL --ignore-unfixed --format json -o trivy-image.json "$IMAGE"
+    - trivy image --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 "$IMAGE"
+  artifacts:
+    when: always
+    paths: [trivy-image.json]
+    expire_in: 30 days
+
+push-registry:
+  stage: push
+  image: $DOCKER_CLI_IMAGE
+  script:
+    - echo "$CI_JOB_TOKEN" | docker login -u gitlab-ci-token --password-stdin "$CI_REGISTRY"
+    - docker push "$IMAGE"
+    - docker tag "$IMAGE" "$CI_REGISTRY_IMAGE:latest" && docker push "$CI_REGISTRY_IMAGE:latest"
+
+# Contrôle OpenStack avant déploiement avec l'application credential Keystone lue dans Vault.
+# Exécuté sur toutes les branches : hors main protégée, Vault doit refuser (preuve du cloisonnement).
+openstack-preflight:
+  stage: preflight
+  image: $DOCKER_CLI_IMAGE
+  id_tokens:
+    VAULT_ID_TOKEN: { aud: "https://vault.dgsn.lab" }
+  script:
+    - *vault-login
+    - AC_ID=$(vget openstack application_credential_id); AC_SECRET=$(vget openstack application_credential_secret)
+    - |
+      OS_TOKEN=$(curl -s --cacert "$CA_FILE" -D - -o /dev/null -H 'Content-Type: application/json' "$OS_AUTH_URL/auth/tokens" \
+        -d "{\"auth\":{\"identity\":{\"methods\":[\"application_credential\"],\"application_credential\":{\"id\":\"$AC_ID\",\"secret\":\"$AC_SECRET\"}}}}" \
+        | awk 'tolower($1)=="x-subject-token:" {print $2}' | tr -d '\r')
+      unset AC_SECRET
+      [ -n "$OS_TOKEN" ] || { echo "Keystone : authentification par application credential en échec"; exit 1; }
+      echo "Keystone : jeton obtenu via application credential (HTTPS, CA DGSN)"
+    - |
+      st=$(curl -sf --cacert "$CA_FILE" -H "X-Auth-Token: $OS_TOKEN" "https://192.168.100.45:8774/v2.1/servers/detail?name=dgsn-app-1" | jq -r '.servers[0].status')
+      echo "Nova : instance dgsn-app-1 = $st"; [ "$st" = ACTIVE ]
+
+deploy-openstack:
+  stage: deploy
+  image: $DOCKER_CLI_IMAGE
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  environment: { name: production, url: "http://$APP_HOST" }
+  id_tokens:
+    VAULT_ID_TOKEN: { aud: "https://vault.dgsn.lab" }
+  script:
+    - *vault-login
+    - (umask 077; vget deploy-ssh private_key > /tmp/deploy_key)
+    - SSH="ssh -i /tmp/deploy_key -o StrictHostKeyChecking=accept-new -o UserKnownHostsFile=/tmp/kh debian@$APP_HOST"
+    - echo "$CI_JOB_TOKEN" | $SSH "sudo docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY"
+    - $SSH "sudo docker pull $IMAGE && (sudo docker rm -f dgsn-app || true) && sudo docker run -d --name dgsn-app --restart unless-stopped --read-only --tmpfs /tmp --cap-drop ALL --security-opt no-new-privileges -p 80:8000 $IMAGE && sudo docker logout $CI_REGISTRY"
+    - for i in $(seq 1 30); do curl -sf "http://$APP_HOST/health" && break; sleep 2; done
+    - curl -sf "http://$APP_HOST/health" | grep -q '"status":"ok"'

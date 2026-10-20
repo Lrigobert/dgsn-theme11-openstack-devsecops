@@ -1,0 +1,12 @@
+﻿monitoring-exporter
+False
+2027-01-17T18:49:49.000000
+access rules : 0 aucune
+P7_APPCRED_OK
+unrestricted : False | expiration : 2027-01-17T18:49:49.000000
+access rules : 5
+  - identity GET /v3/**
+  - compute GET /v2.1/**
+  - network GET /v2.0/**
+  - image GET /v2/**
+  - placement GET /**

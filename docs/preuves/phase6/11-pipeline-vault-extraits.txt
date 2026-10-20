@@ -1,0 +1,21 @@
+﻿--- openstack-preflight
+Downloading artifacts from coordinator... ok        correlation_id=01M58NT4CPC65KW7AVMKDHBGW7 id=19 status=200 token=eyJraWQiO
+Downloading artifacts from coordinator... ok        correlation_id=01M58NT4GB4R2R462MQFCTMXSR id=20 status=200 token=eyJraWQiO
+Downloading artifacts from coordinator... ok        correlation_id=01M58NT4KJ60C2YJTPMFECW47X id=22 status=200 token=eyJraWQiO
+Vault : connexion acceptée (politiques : ["ci-demo-app"])
+$ vget() { curl -sf --cacert "$CA_FILE" -H "X-Vault-Token: $VAULT_TOKEN" "$VAULT_ADDR/v1/kv/data/ci/demo-app/$1" | jq -r ".data.data.$2"; }
+Keystone : jeton obtenu via application credential (HTTPS, CA DGSN)
+$ st=$(curl -sf --cacert "$CA_FILE" -H "X-Auth-Token: $OS_TOKEN" "https://192.168.100.45:8774/v2.1/servers/detail?name=dgsn-app-1" | jq -r '.servers[0].status') # collapsed multi-line command
+Nova : instance dgsn-app-1 = ACTIVE
+--- deploy-openstack
+Downloading artifacts from coordinator... ok        correlation_id=01M58NTBNPA3RT05MB98CQY9A4 id=19 status=200 token=eyJraWQiO
+Downloading artifacts from coordinator... ok        correlation_id=01M58NTBRDCA614KFKHHSYWY1S id=20 status=200 token=eyJraWQiO
+Downloading artifacts from coordinator... ok        correlation_id=01M58NTBTVD0344XBNQHTZ0848 id=22 status=200 token=eyJraWQiO
+Vault : connexion acceptée (politiques : ["ci-demo-app"])
+$ vget() { curl -sf --cacert "$CA_FILE" -H "X-Vault-Token: $VAULT_TOKEN" "$VAULT_ADDR/v1/kv/data/ci/demo-app/$1" | jq -r ".data.data.$2"; }
+$ for i in $(seq 1 30); do curl -sf "http://$APP_HOST/health" && break; sleep 2; done
+{"status":"ok","version":"2"}
+$ curl -sf "http://$APP_HOST/health" | grep -q '"status":"ok"'
+--- recherche de secrets dans les journaux :
+secret d'application credential : 0 occurrence(s) ; jeton Vault (hvs.) : 0 ; clé privée SSH : 0
+AUCUN_SECRET_DANS_LES_JOURNAUX

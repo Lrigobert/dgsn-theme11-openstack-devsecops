@@ -1,0 +1,16 @@
+﻿controller                 : ok=351  changed=81   unreachable=0    failed=0    skipped=258  rescued=0    ignored=0   
+localhost                  : ok=4    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+== Conteneurs ==
+supprimé : heat_api
+supprimé : heat_api_cfn
+supprimé : heat_engine
+supprimé : fluentd
+volume fluentd_data supprimé
+== Keystone (services, endpoints, utilisateurs Heat) ==
+service heat supprimé
+service heat-cfn supprimé
+utilisateur heat supprimé
+utilisateur heat_domain_admin supprimé
+domaine heat_user_domain supprimé
+glance keystone neutron nova placement 
+CLEANUP_OK

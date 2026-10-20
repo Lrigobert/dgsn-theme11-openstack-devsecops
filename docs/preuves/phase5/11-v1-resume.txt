@@ -1,0 +1,7 @@
+﻿semgrep.json: 6 findings
+  - subprocess-injection (ligne 21, ERROR)
+  - dangerous-subprocess-use (ligne 21, ERROR)
+  - subprocess-shell-true (ligne 21, ERROR)
+  - avoid-pyyaml-load (ligne 28, ERROR)
+  - avoid_app_run_with_bad_host (ligne 33, WARNING)
+  - debug-enabled (ligne 33, WARNING)

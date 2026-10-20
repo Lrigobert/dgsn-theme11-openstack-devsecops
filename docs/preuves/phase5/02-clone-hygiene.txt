@@ -1,0 +1,30 @@
+﻿supprimé : /etc/kolla
+supprimé : /home/jacques1/dgsn/secrets
+supprimé : /home/jacques1/dgsn/kolla
+supprimé : /home/jacques1/dgsn/inventory
+supprimé : /home/jacques1/dgsn/terraform
+supprimé : /home/jacques1/dgsn/logs
+supprimé : /home/jacques1/dgsn/logs-2024.1-echec
+supprimé : /home/jacques1/dgsn/ansible
+supprimé : /home/jacques1/dgsn/scripts
+supprimé : /home/jacques1/kolla-venv
+supprimé : /home/jacques1/.ssh/id_ed25519
+supprimé : /home/jacques1/.ssh/id_ed25519.pub
+supprimé : /home/jacques1/.ssh/known_hosts
+supprimé : /home/jacques1/.ssh/known_hosts.old
+supprimé : /home/jacques1/.ssh/known_hosts_p4
+supprimé : /home/jacques1/.ansible
+supprimé : /home/jacques1/.terraform.d
+--- contrôle : fichiers sensibles restants
+/usr/lib/python3/dist-packages/ansible_collections/ovirt/ovirt/roles/engine_setup/examples/passwords.yml
+/usr/lib/python3/dist-packages/ansible_collections/ovirt/ovirt/roles/engine_setup/tests/passwords.yml
+/usr/lib/python3/dist-packages/ansible_collections/ovirt/ovirt/roles/shutdown_env/examples/passwords.yml
+/usr/lib/python3/dist-packages/ansible_collections/ovirt/ovirt/roles/cluster_upgrade/examples/passwords.yml
+/usr/lib/python3/dist-packages/ansible_collections/ovirt/ovirt/roles/image_template/examples/passwords.yml
+/usr/lib/python3/dist-packages/ansible_collections/ovirt/ovirt/roles/manageiq/examples/passwords.yml
+/usr/lib/python3/dist-packages/ansible_collections/ovirt/ovirt/roles/infra/examples/vars/passwords.yml
+/usr/lib/python3/dist-packages/ansible_collections/ovirt/ovirt/roles/hosted_engine_setup/examples/passwords.yml
+/usr/lib/python3/dist-packages/ansible_collections/ovirt/ovirt/roles/repositories/examples/passwords.yml
+/usr/lib/python3/dist-packages/ansible_collections/ovirt/ovirt/roles/vm_infra/examples/passwords.yml
+authorized_keys : 3 clé(s)
+CLONE_HYGIENE_OK

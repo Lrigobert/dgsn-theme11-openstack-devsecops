@@ -1,0 +1,56 @@
+﻿Interfaces : gestion=ens33 nat=ens37 externe=ens38
+== Disque (avant) ==
+NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0                       7:0    0  63,8M  1 loop /snap/core20/2866
+loop1                       7:1    0  63,8M  1 loop /snap/core20/2922
+loop2                       7:2    0    74M  1 loop /snap/core22/2411
+loop3                       7:3    0    74M  1 loop /snap/core22/2437
+loop4                       7:4    0 115,1M  1 loop /snap/lxd/40115
+loop5                       7:5    0 115,3M  1 loop /snap/lxd/40575
+loop6                       7:6    0  50,1M  1 loop /snap/snapd/27406
+loop7                       7:7    0  50,3M  1 loop /snap/snapd/27738
+sda                         8:0    0   120G  0 disk 
+├─sda1                      8:1    0     1M  0 part 
+├─sda2                      8:2    0     2G  0 part /boot
+└─sda3                      8:3    0    38G  0 part 
+  └─ubuntu--vg-ubuntu--lv 253:0    0    38G  0 lvm  /
+sr0                        11:0    1  1024M  0 rom  
+root=/dev/mapper/ubuntu--vg-ubuntu--lv pv=/dev/sda3 disque=/dev/sda partition=3
+CHANGED: partition=3 start=4198400 old: size=79685632 end=83884032 new: size=247459807 end=251658207
+  Physical volume "/dev/sda3" changed
+  1 physical volume(s) resized or updated / 0 physical volume(s) not resized
+  Size of logical volume ubuntu-vg/ubuntu-lv changed from <38,00 GiB (9727 extents) to <118,00 GiB (30207 extents).
+  Logical volume ubuntu-vg/ubuntu-lv successfully resized.
+resize2fs 1.46.5 (30-Dec-2021)
+Filesystem at /dev/mapper/ubuntu--vg-ubuntu--lv is mounted on /; on-line resizing required
+old_desc_blocks = 5, new_desc_blocks = 15
+The filesystem on /dev/mapper/ubuntu--vg-ubuntu--lv is now 30931968 (4k) blocks long.
+
+== Disque (après) ==
+NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0                       7:0    0  63,8M  1 loop /snap/core20/2866
+loop1                       7:1    0  63,8M  1 loop /snap/core20/2922
+loop2                       7:2    0    74M  1 loop /snap/core22/2411
+loop3                       7:3    0    74M  1 loop /snap/core22/2437
+loop4                       7:4    0 115,1M  1 loop /snap/lxd/40115
+loop5                       7:5    0 115,3M  1 loop /snap/lxd/40575
+loop6                       7:6    0  50,1M  1 loop /snap/snapd/27406
+loop7                       7:7    0  50,3M  1 loop /snap/snapd/27738
+sda                         8:0    0   120G  0 disk 
+├─sda1                      8:1    0     1M  0 part 
+├─sda2                      8:2    0     2G  0 part /boot
+└─sda3                      8:3    0   118G  0 part 
+  └─ubuntu--vg-ubuntu--lv 253:0    0   118G  0 lvm  /
+sr0                        11:0    1  1024M  0 rom  
+Filesystem                         Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv  116G  9,3G  102G   9% /
+== Hostname et /etc/hosts ==
+== Réseau (netplan, cloud-init désactivé) ==
+== machine-id et clés hôte déjà régénérés (2026-10-18T09:57:23+00:00) ==
+== sudo ==
+/etc/sudoers: parsed OK
+/etc/sudoers.d/90-jacques1: parsed OK
+/etc/sudoers.d/README: parsed OK
+/etc/sudoers.d/jacques1: parsed OK
+/etc/sudoers.d/jacques1-nopasswd: parsed OK
+P1_SCRIPT_OK interfaces=ens33,ens37,ens38

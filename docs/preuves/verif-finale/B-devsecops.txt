@@ -1,0 +1,48 @@
+﻿hÃ´te avant : 6,9 Go
+gitlab reprise : exit 0
+gitlab redÃ©marrÃ©e, SSH : True
+exporter en clair hÃ©ritÃ© (node-exporter.service) : disabled
+--- Vault aprÃ¨s redÃ©marrage (attendu : scellÃ© puis descellÃ©)
+{"sealed":false}
+{"sealed":false,"version":"2.2.0","storage_type":"raft"}
+--- GitLab
+GitLab HTTP 200 aprÃ¨s 82 s
+is valid
+valide : True
+Exception ignored in: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>
+BrokenPipeError: [Errno 32] Broken pipe
+--- Pipeline complet (main, Vault)
+commit 377073261a3532f56411c4f0a73db02f8b942c9c poussé (v2-corrige)
+pipeline 7
+PIPELINE 7 statut=failed durée=73s file+exécution=1s
+  job semgrep-sast       success     19s
+  job trivy-fs-sca       success     42s
+  job build-image        success      4s
+  job trivy-image        success      2s
+  job push-registry      success      2s
+  job openstack-preflight failed       3s
+  job deploy-openstack   skipped      0s
+rapports : /home/jacques1/dgsn/p5-reports/v2-corrige
+build-image.log
+deploy-openstack.log
+openstack-preflight.log
+push-registry.log
+semgrep.json
+semgrep-sast.log
+trivy-fs.json
+trivy-fs-sca.log
+trivy-image.json
+trivy-image.log
+Error making API request.
+System.Management.Automation.RemoteException
+URL: GET https://127.0.0.1:8200/v1/sys/internal/ui/mounts/kv/ci/demo-app/openstack
+Code: 503. Errors:
+System.Management.Automation.RemoteException
+* Vault is sealed
+--- recherche de secrets dans les journaux :
+secret d'application credential : 476 occurrence(s) ; jeton Vault (hvs.) : 0 ; clé privée SSH : 0
+FUITE_DETECTEE
+{"status":"ok","version":"2"}
+
+hÃ´te aprÃ¨s : 3,8 Go
+VERIF_B_DONE

@@ -1,0 +1,8 @@
+﻿22:28:22 hote=5,2Go controller_dispo=48Mo ksm=0Mo
+22:28:37 hote=5,3Go controller_dispo=50Mo ksm=0Mo
+22:28:53 hote=3,7Go controller_dispo=50Mo ksm=0Mo
+22:29:09 hote=3,3Go controller_dispo=57Mo ksm=0Mo
+22:29:25 hote=3,1Go controller_dispo=49Mo ksm=0Mo
+22:29:41 hote=3,0Go controller_dispo=49Mo ksm=0Mo
+22:29:57 hote=2,9Go controller_dispo=49Mo ksm=0Mo
+ALERTE hote < 3 Go

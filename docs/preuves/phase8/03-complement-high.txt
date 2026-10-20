@@ -1,0 +1,10 @@
+﻿        "Result"
+        "Result"
+scap-1                     : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+scap-2                     : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+scap-1 no_empty_passwords_unix : 
+scap-2 no_empty_passwords_unix : 
+scap-1 no_empty_passwords_unix : Result
+	pass
+scap-2 no_empty_passwords_unix : Result
+	pass

@@ -1,0 +1,5 @@
+﻿pfSense : memsize = "3104" -> memsize = "1536" (snapshot avant-ram-1536)
+192.168.100.1 rÃ©pond aprÃ¨s 27 s
+rtt min/avg/max/mdev = 0.439/0.482/0.526/0.043 ms
+rtt min/avg/max/mdev = 43.716/44.743/45.771/1.027 ms
+2620:2d:4002:1::102 archive.ubuntu.com

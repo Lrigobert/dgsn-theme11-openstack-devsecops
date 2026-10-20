@@ -1,0 +1,7 @@
+﻿terraform apply : 24 s (Apply complete! Resources: 33 added, 0 changed, 0 destroyed.)
+Terminated
+ansible-playbook : 113 s (rc=143)
+TOTAL apply + configuration : 137 s (2 min 17 s)
+FAIL  Ansible rc=143
+PASS  durée 137 s < 600 s
+== Tests ==

@@ -1,0 +1,2 @@
+﻿localhost | SUCCESS => {"changed": false,"ping": "pong"}
+controller | SUCCESS => {"changed": false,"ping": "pong"}

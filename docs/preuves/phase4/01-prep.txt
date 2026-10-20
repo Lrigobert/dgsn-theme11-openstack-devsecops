@@ -1,0 +1,15 @@
+﻿== Terraform ==
+Terraform v1.16.6
+== Image Debian 12 genericcloud ==
+debian-12-genericcloud-amd64.qcow2: OK
+d94138ab-b048-4bf3-8ae4-155a7662fed7
+debian-12
+348782592
+active
+== Flavor dgsn.p4 (écart : 512 Mo, contrainte RAM du lab) ==
+4f0628bf-1f40-4b23-8bf4-aef38daa6956
+5
+dgsn.p4
+512
+1
+P4_PREP_OK

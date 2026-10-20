@@ -1,0 +1,21 @@
+# Deux fichiers de provisioning Grafana (séparés par le script p7-grafana.sh)
+# --- datasources/dgsn.yaml
+apiVersion: 1
+datasources:
+  - name: Prometheus-DGSN
+    uid: dgsn-prom
+    type: prometheus
+    access: proxy
+    url: http://127.0.0.1:9090
+    isDefault: false
+    editable: false
+# --- dashboards/dgsn.yaml
+apiVersion: 1
+providers:
+  - name: dgsn-theme11
+    folder: DGSN Thème 11
+    type: file
+    disableDeletion: true
+    allowUiUpdates: false
+    options:
+      path: /var/lib/grafana/dashboards/dgsn

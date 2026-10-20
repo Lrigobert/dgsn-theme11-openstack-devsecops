@@ -1,0 +1,8 @@
+﻿service : active
+openstack-exporter, version  (branch: , revision: unknown)
+métriques openstack_* : 115
+openstack_glance_up 1
+openstack_identity_up 1
+openstack_neutron_up 1
+openstack_nova_up 1
+openstack_placement_up 1

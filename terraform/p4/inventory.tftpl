@@ -1,0 +1,13 @@
+# Généré par Terraform (terraform/p4) — ne pas éditer
+%{ for role in ["bastion", "web", "app", "db"] ~}
+[${role}]
+%{ for name, h in hosts ~}
+%{ if h.role == role ~}
+${name} ansible_host=${role == "bastion" ? bastion : h.ip}
+%{ endif ~}
+%{ endfor ~}
+
+%{ endfor ~}
+[all:vars]
+ansible_user=debian
+ansible_python_interpreter=/usr/bin/python3

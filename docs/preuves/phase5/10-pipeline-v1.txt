@@ -1,0 +1,16 @@
+﻿commit 3c6ab9d05cc9045bf607d80cf68d6090d9ed894f poussé (v1-vulnerable)
+pipeline 2
+PIPELINE 2 statut=failed durée=88s file+exécution=2s
+  job semgrep-sast       failed      89s
+  job trivy-fs-sca       skipped      0s
+  job build-image        skipped      0s
+  job trivy-image        skipped      0s
+  job push-registry      skipped      0s
+  job deploy-openstack   skipped      0s
+rapports : /home/jacques1/dgsn/p5-reports/v1-vulnerable
+build-image.log
+deploy-openstack.log
+push-registry.log
+semgrep-sast.log
+trivy-fs-sca.log
+trivy-image.log

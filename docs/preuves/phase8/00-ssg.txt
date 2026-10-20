@@ -1,0 +1,43 @@
+﻿OpenSCAP command line tool (oscap) 1.2.17
+SSG v0.1.82
+ssg.zip: OK
+ansible
+bash
+Contributors.md
+== ssg-debian12-ds.xml
+  anssi_bp28_enhanced
+  anssi_bp28_high
+  anssi_bp28_intermediary
+  anssi_bp28_minimal
+  anssi_np_nt28_average
+  anssi_np_nt28_high
+  anssi_np_nt28_minimal
+  anssi_np_nt28_restrictive
+  cis_level1_server
+  cis_level1_workstation
+  cis_level2_server
+  cis_level2_workstation
+  standard
+== ssg-ubuntu2404-ds.xml
+  cis_level1_server
+  cis_level1_workstation
+  cis_level2_server
+  cis_level2_workstation
+  stig
+== ssg-ubuntu2204-ds.xml
+  cis_level1_server
+  cis_level1_workstation
+  cis_level2_server
+  cis_level2_workstation
+  standard
+  stig
+== playbooks Ansible fournis
+debian12-playbook-cis_level1_server.yml
+debian12-playbook-cis_level1_workstation.yml
+debian12-playbook-cis_level2_server.yml
+debian12-playbook-cis_level2_workstation.yml
+debian12-playbook-standard.yml
+ubuntu2404-playbook-cis_level1_server.yml
+ubuntu2404-playbook-cis_level1_workstation.yml
+ubuntu2404-playbook-cis_level2_server.yml
+ubuntu2404-playbook-cis_level2_workstation.yml

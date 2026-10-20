@@ -1,0 +1,6 @@
+﻿appel API (création de 8 instances) : 1.0 s
+instances ACTIVE : 8/8 ; ERROR : 0 ; durée jusqu'à l'état final : 33.4 s ; débit : 14.4 instances/min
+controller : RAM disponible 3648 Mo
+KSM : 224 Mo partagés
+suppression des 8 instances : 9 s
+P9_BURST_PASS

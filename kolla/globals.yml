@@ -1,0 +1,46 @@
+---
+# globals.yml — OpenStack 2025.1 (Epoxy) all-in-one extensible, lab DGSN Thème 11
+# Aucun secret ici : les mots de passe sont générés dans /etc/kolla/passwords.yml sur VM1 (kolla-genpwd).
+
+kolla_base_distro: "ubuntu"                # images 2025.1-ubuntu-noble (hôte Ubuntu 24.04)
+openstack_release: "2025.1"
+
+# Réseau
+network_interface: "ens33"                 # gestion / API, 192.168.100.40
+neutron_external_interface: "ens38"        # 3e NIC VMnet1 sans IP (réseau externe flat, physnet1)
+kolla_internal_vip_address: "192.168.100.45"
+keepalived_virtual_router_id: "45"         # évite un conflit VRRP avec d'autres équipements du VMnet1
+neutron_plugin_agent: "openvswitch"
+neutron_type_drivers: "flat,vlan,vxlan"
+neutron_tenant_network_types: "vxlan"
+
+# Services
+enable_haproxy: "yes"
+enable_keepalived: "yes"
+enable_horizon: "yes"
+enable_cinder: "no"                        # Cinder LVM prévu plus tard
+enable_neutron_provider_networks: "yes"
+
+# Calcul : pas de virtualisation imbriquée (VBS actif sur l'hôte) -> émulation qemu
+nova_compute_virt_type: "qemu"
+
+# --- TLS (phase 6) — certificats émis par la CA interne DGSN (scripts/p6-pki.sh) ---
+# VIP interne = VIP externe : Kolla impose le même réglage TLS pour les deux.
+kolla_enable_tls_external: "yes"
+kolla_enable_tls_internal: "yes"
+kolla_copy_ca_into_containers: "yes"           # CA DGSN ajoutée au magasin de confiance des conteneurs
+openstack_cacert: "/etc/ssl/certs/ca-certificates.crt"
+kolla_admin_openrc_cacert: "/etc/kolla/certificates/ca/dgsn-root-ca.crt"
+# Chiffrement haproxy -> services (kolla_enable_tls_backend) non activé : perspective (voir rapport, mTLS)
+
+# --- Dimensionnement contraint (lab 12 Go, voir docs/rapport-notes/dimensionnement.md) ---
+# Défaut Kolla : min(vCPU, 5) workers API et min(vCPU, 3) workers RPC par service.
+openstack_service_workers: "1"
+openstack_service_rpc_workers: "1"
+# Services non exigés par le sujet : orchestration Heat (Terraform la remplace),
+# collecte de logs fluentd (logs conservés en fichiers ; supervision en P7).
+enable_heat: "no"
+enable_fluentd: "no"
+# memcached : 256 Mo par défaut
+memcached_max_memory: "128"
+# MariaDB : buffer pool InnoDB surchargé dans kolla/config/galera.cnf (défaut = 40 % de la RAM)

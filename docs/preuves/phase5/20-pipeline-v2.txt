@@ -1,0 +1,19 @@
+﻿commit 89f12cb1ef311d33f5d5166479ea38e12fc52162 poussé (v2-corrige)
+pipeline 3
+PIPELINE 3 statut=success durée=133s file+exécution=2s
+  job semgrep-sast       success     17s
+  job trivy-fs-sca       success     27s
+  job build-image        success     30s
+  job trivy-image        success      3s
+  job push-registry      success      3s
+  job deploy-openstack   success     54s
+rapports : /home/jacques1/dgsn/p5-reports/v2-corrige
+build-image.log
+deploy-openstack.log
+push-registry.log
+semgrep.json
+semgrep-sast.log
+trivy-fs.json
+trivy-fs-sca.log
+trivy-image.json
+trivy-image.log

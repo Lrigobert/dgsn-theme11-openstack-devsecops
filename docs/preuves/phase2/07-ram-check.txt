@@ -1,0 +1,46 @@
+﻿== controller ==
+               total        used        free      shared  buff/cache   available
+Mem:           11914        8842        2023          69        1448        3071
+conteneurs: 33
+placement_api 411MiB / 11.63GiB
+heat_api 375MiB / 11.63GiB
+heat_engine 294MiB / 11.63GiB
+nova_api 654.4MiB / 11.63GiB
+keystone 618.1MiB / 11.63GiB
+neutron_server 608.3MiB / 11.63GiB
+nova_metadata 541.5MiB / 11.63GiB
+horizon 518.8MiB / 11.63GiB
+== Placement (inventaire / usage MEMORY_MB, VCPU) ==
+openstack: 'resource provider inventory list openstack: 'resource provider list -f value -c uuid' is not an openstack command. See 'openstack --help'. -f value -c resource_class -c total -c reserved -c allocation_ratio' is not an openstack command. See 'openstack --help'.
+Did you mean one of these?
+  service create
+  service delete
+  service list
+  service provider create
+  service provider delete
+  service provider list
+  service provider set
+  service provider show
+  service set
+  service show
+openstack: 'resource provider usage show openstack: 'resource provider list -f value -c uuid' is not an openstack command. See 'openstack --help'. -f value' is not an openstack command. See 'openstack --help'.
+Did you mean one of these?
+  service create
+  service delete
+  service list
+  service provider create
+  service provider delete
+  service provider list
+  service provider set
+  service provider show
+  service set
+  service show
+== Instances ==
+p2-test-cirros SHUTOFF m1.tiny
+== Flavors ==
+m1.tiny 512 1 1
+m1.small 2048 20 1
+m1.medium 4096 40 2
+m1.large 8192 80 4
+m1.xlarge 16384 160 8
+m2.tiny 512 1 2

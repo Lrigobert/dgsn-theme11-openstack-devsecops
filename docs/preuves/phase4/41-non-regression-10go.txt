@@ -1,0 +1,54 @@
+﻿== Services Keystone ==
+glance image
+keystone identity
+neutron network
+nova compute
+placement placement
+PASS  service keystone enregistré
+PASS  service glance enregistré
+PASS  service nova enregistré
+PASS  service neutron enregistré
+PASS  service placement enregistré
+nova-compute up
+nova-conductor up
+nova-scheduler up
+True neutron-dhcp-agent
+True neutron-l3-agent
+True neutron-metadata-agent
+True neutron-openvswitch-agent
+== Horizon (VIP 192.168.100.45) ==
+PASS  Horizon HTTP 200
+== Réseaux ==
+PASS  demo-net type vxlan
+PASS  public1 type flat (externe)
+== Groupe de sécurité (22, 8080, ICMP autorisés ; 8081 non) ==
+None  egress
+tcp 22:22 ingress
+icmp  ingress
+tcp 8080:8080 ingress
+None  egress
+== Instance cirros ==
+création + ACTIVE en 17 s
+PASS  instance p2-test-cirros ACTIVE
+IP flottante : 192.168.100.222
+PASS  ping 192.168.100.222 depuis VM1 (après ~10 s)
+PASS  TCP 22 autorisé : ouvert
+délai user-data (8080 ouvert après SSH) : 0 s
+PASS  TCP 8080 autorisé : ouvert
+PASS  TCP 8081 non autorisé : bloqué (timeout)
+PASS  TCP 8081 joignable après ajout de la règle (contre-preuve)
+P2_TEST_PASS
+=====
+== reader (dgsn-id-reader sur dgsn-identification) ==
+PASS  reader peut lister les instances de son projet
+  -> ForbiddenException: 403: Client Error for url: http://192.168.100.45:8774/v2.1/servers, Policy doesn't allow os_compute_api:servers:create to be performed.
+PASS  reader NE PEUT PAS créer d'instance (refus 403 prouvé)
+PASS  reader NE PEUT PAS créer de réseau (ForbiddenException: 403: Client Error for url: http://192.168.100.45:9696/v2.0/networks, r)
+== member (dgsn-pj-member sur dgsn-pj) ==
+PASS  member peut créer un réseau dans son projet
+PASS  member NE PEUT PAS accéder au projet dgsn-identification (The request you have made requires authentication. (HTTP 401) (Request-ID: req-9d3a62ed-52)
+PASS  member NE PEUT PAS lister les utilisateurs (action admin refusée)
+== admin (dgsn-ops-admin sur dgsn-ops) ==
+PASS  admin peut administrer (liste des projets)
+P3_TEST_PASS
+p2-test-cirros supprimée

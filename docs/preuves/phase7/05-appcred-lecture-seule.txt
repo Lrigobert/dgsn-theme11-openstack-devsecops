@@ -1,0 +1,5 @@
+﻿jeton Keystone obtenu (application credential de supervision)
+GET  /v2.0/networks  -> HTTP 200 (attendu 200 : lecture autorisée)
+POST /v2.0/networks  -> HTTP 401 (attendu 401/403 : écriture refusée par les access rules)
+POST /v2.1/servers   -> HTTP 401 (attendu 401/403)
+LECTURE_SEULE_PROUVEE

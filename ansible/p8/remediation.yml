@@ -1,0 +1,37 @@
+---
+# Phase 8 — remédiation CIS niveau 1 (Debian 12) par le playbook officiel SSG 0.1.82, suivie de Fail2Ban.
+# Pare-feu : le profil SSG retient nftables (ufw désinstallé), chaînes de base en politique « accept »
+# (pas de risque de perte d'accès SSH ; le filtrage d'entrée reste assuré par les groupes de sécurité Neutron).
+# Exclusion documentée (--skip-tags) : wireless_disable_interfaces (bug SSG : paquet « NetworkManager »
+# inexistant sous Debian, où il se nomme « network-manager » ; aucune interface sans fil sur une instance).
+# Copie tolérante (ignore_errors par tâche) générée par scripts/p8-ssg-tolerant.py : 4 tâches du playbook
+# officiel échouaient pour des raisons d'environnement (sudo attendu, DNS transitoire, paquet NetworkManager,
+# service named absent) ; chaque échec restant est compté dans le rapport.
+- name: Remédiation CIS niveau 1 serveur (playbook SSG, version tolérante)
+  ansible.builtin.import_playbook: "{{ lookup('env', 'HOME') }}/dgsn/ansible/p8/ssg-cis-l1-tolerant.yml"
+
+- name: Fail2Ban (protection SSH des instances exposées)
+  hosts: scap
+  become: true
+  tasks:
+    - name: Paquet
+      ansible.builtin.apt:
+        name: [fail2ban, python3-systemd]
+    - name: Jail sshd (journal systemd ; Debian 12 n'a pas de /var/log/auth.log)
+      ansible.builtin.copy:
+        dest: /etc/fail2ban/jail.d/dgsn-sshd.local
+        mode: "0644"
+        content: |
+          [sshd]
+          enabled  = true
+          backend  = systemd
+          maxretry = 3
+          findtime = 10m
+          bantime  = 30m
+          # VM1 (administration) n'est jamais bannie : évite l'auto-blocage de l'automatisation
+          ignoreip = 127.0.0.1/8 192.168.100.10
+    - name: Service
+      ansible.builtin.systemd:
+        name: fail2ban
+        enabled: true
+        state: restarted

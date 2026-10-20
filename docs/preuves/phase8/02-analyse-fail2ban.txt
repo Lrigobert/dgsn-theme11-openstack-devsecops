@@ -1,0 +1,57 @@
+﻿== Règles encore en échec après remédiation (scap-1), par sévérité
+par sévérité : {'low': 6, 'medium': 22, 'high': 2, 'unknown': 1}
+  [high] grub2_password
+  [high] no_empty_passwords_unix
+  [medium] account_disable_post_pw_expiration
+  [medium] accounts_password_pam_enforce_root
+  [medium] accounts_password_pam_pwhistory_enabled
+  [medium] accounts_password_pam_pwhistory_enforce_root
+  [medium] accounts_password_pam_pwhistory_remember
+  [medium] accounts_password_pam_pwhistory_use_authtok
+  [medium] accounts_passwords_pam_faillock_deny
+  [medium] accounts_passwords_pam_faillock_enabled
+  [medium] accounts_passwords_pam_faillock_unlock_time
+  [medium] ensure_pam_wheel_group_empty
+  [medium] grub2_enable_apparmor
+  [medium] journald_disable_forward_to_syslog
+  [medium] kernel_module_usb-storage_disabled
+  [medium] package_chrony_installed
+  [medium] package_iptables-persistent_installed
+  [medium] package_ufw_installed
+  [medium] service_systemd-journal-upload_enabled
+  [medium] set_password_hashing_algorithm_logindefs
+  [medium] sshd_use_strong_ciphers
+  [medium] systemd_journal_upload_server_tls
+  [medium] systemd_journal_upload_url
+  [medium] use_pam_wheel_group_for_su
+  [low] kernel_module_cramfs_disabled
+  [low] kernel_module_freevxfs_disabled
+  [low] kernel_module_hfs_disabled
+  [low] kernel_module_hfsplus_disabled
+  [low] kernel_module_jffs2_disabled
+  [low] partition_for_tmp
+  [unknown] sshd_limit_user_access
+== Tâches en échec toléré pendant la remédiation
+Check that the gdm3 group is defined
+Check that the gdm group is defined
+Check that the sssd user is defined
+Check that the syslog user is defined
+== Fail2Ban
+Warning: Permanently added '192.168.100.204' (ED25519) to the list of known hosts.
+active
+|  |- Currently failed:	0
+|  |- Total failed:	0
+   |- Currently banned:	0
+   |- Total banned:	0
+règle temporaire SSH depuis 192.168.100.40 : d8fee628-4b25-49ac-9111-47fef7212c49
+tentatives envoyées
+Warning: Permanently added '192.168.100.204' (ED25519) to the list of known hosts.
+   |- Currently banned:	1
+   |- Total banned:	1
+   `- Banned IP list:	192.168.100.40
+connexion TCP 22 depuis l'attaquant après bannissement : bloqué
+Warning: Permanently added '192.168.100.204' (ED25519) to the list of known hosts.
+   |- Currently banned:	0
+règle temporaire supprimée
+Warning: Permanently added '192.168.100.204' (ED25519) to the list of known hosts.
+== SSH d'administration (VM1, ignoreip) toujours possible : scap-1

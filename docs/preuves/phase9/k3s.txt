@@ -1,0 +1,90 @@
+﻿
+PLAY [Attente de la joignabilité SSH (démarrage qemu)] *************************
+
+TASK [Attendre SSH] ************************************************************
+ok: [k3s-2]
+ok: [k3s-1]
+ok: [k3s-3]
+
+PLAY [Binaire k3s] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [k3s-2]
+ok: [k3s-1]
+ok: [k3s-3]
+
+TASK [Attendre cloud-init] *****************************************************
+ok: [k3s-3]
+ok: [k3s-2]
+ok: [k3s-1]
+
+TASK [Sommes de contrôle de la release] ****************************************
+changed: [k3s-3]
+changed: [k3s-1]
+changed: [k3s-2]
+
+TASK [Somme attendue du binaire] ***********************************************
+ok: [k3s-1]
+ok: [k3s-2]
+ok: [k3s-3]
+
+TASK [Binaire k3s (vérifié)] ***************************************************
+changed: [k3s-2]
+changed: [k3s-1]
+changed: [k3s-3]
+
+TASK [Script d'installation de la même version] ********************************
+changed: [k3s-2]
+changed: [k3s-1]
+changed: [k3s-3]
+
+PLAY [Serveur k3s] *************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [k3s-1]
+
+TASK [Installation du serveur] *************************************************
+changed: [k3s-1]
+
+TASK [Attendre le jeton de jonction] *******************************************
+ok: [k3s-1]
+
+TASK [Lire le jeton (reste en mémoire Ansible, jamais affiché)] ****************
+ok: [k3s-1]
+
+PLAY [Agents k3s] **************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [k3s-2]
+ok: [k3s-3]
+
+TASK [Installation des agents] *************************************************
+changed: [k3s-3]
+changed: [k3s-2]
+
+PLAY [Vérification du cluster] *************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [k3s-1]
+
+TASK [Trois nœuds Ready] *******************************************************
+ok: [k3s-1]
+
+TASK [Nœuds] *******************************************************************
+ok: [k3s-1]
+
+TASK [Afficher] ****************************************************************
+ok: [k3s-1] => {
+    "nodes.stdout_lines": [
+        "NAME    STATUS   ROLES           AGE     VERSION        INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION                 CONTAINER-RUNTIME",
+        "k3s-1   Ready    control-plane   6m59s   v1.37.1+k3s1   10.90.0.45    <none>        Debian GNU/Linux 12 (bookworm)   6.1.0-54-cloud-amd64 (amd64)   containerd://2.3.4-k3s1",
+        "k3s-2   Ready    <none>          82s     v1.37.1+k3s1   10.90.0.210   <none>        Debian GNU/Linux 12 (bookworm)   6.1.0-54-cloud-amd64 (amd64)   containerd://2.3.4-k3s1",
+        "k3s-3   Ready    <none>          5m46s   v1.37.1+k3s1   10.90.0.174   <none>        Debian GNU/Linux 12 (bookworm)   6.1.0-54-cloud-amd64 (amd64)   containerd://2.3.4-k3s1"
+    ]
+}
+
+PLAY RECAP *********************************************************************
+k3s-1                      : ok=15   changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+k3s-2                      : ok=9    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+k3s-3                      : ok=9    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

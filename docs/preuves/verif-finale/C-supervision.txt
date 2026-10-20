@@ -1,0 +1,15 @@
+﻿gitlab suspendue : exit 0
+VM4 reprise : exit 0
+VM4 redÃ©marrÃ©e, SSH : True
+  prometheus : active
+  grafana-server : active
+  openstack-exporter : active
+  cible dgsn-node-mtls 192.168.100.40:9100 up
+  cible dgsn-node-mtls 192.168.100.220:9100 up
+  cible dgsn-openstack 127.0.0.1:9180 up
+  "database": "ok",
+hÃ´te : 3,7 Go
+VERIF_C_DONE
+OK  Charge système (load 1 min)                   {{vm}}         VM1-Ansible=0.0, dgsn-app-1=0.3, VM4-Monitoring=0.6, controller=0.6
+
+requêtes avec données : 28/28

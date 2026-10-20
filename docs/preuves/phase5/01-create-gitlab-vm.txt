@@ -1,0 +1,47 @@
+﻿== ArrÃªt propre de VM1 ==
+== Clone complet ==
+displayName = "gitlab"
+numvcpus = "4"
+memsize = "4096"
+== Premier dÃ©marrage du clone (IP .10 temporaire, VM1 arrÃªtÃ©e) ==
+== Disque ==
+NAME                        SIZE TYPE MOUNTPOINTS
+sda                          40G disk 
+├─sda1                        1M part 
+├─sda2                        2G part /boot
+└─sda3                       38G part 
+  └─ubuntu--vg-ubuntu--lv    19G lvm  /
+NOCHANGE: partition 3 could only be grown by 2015 [fudge=2048]
+growpart : rien à agrandir
+  Physical volume "/dev/sda3" changed
+  1 physical volume(s) resized or updated / 0 physical volume(s) not resized
+  Size of logical volume ubuntu-vg/ubuntu-lv changed from <19,00 GiB (4863 extents) to <38,00 GiB (9727 extents).
+  Logical volume ubuntu-vg/ubuntu-lv successfully resized.
+resize2fs 1.46.5 (30-Dec-2021)
+Filesystem at /dev/mapper/ubuntu--vg-ubuntu--lv is mounted on /; on-line resizing required
+old_desc_blocks = 3, new_desc_blocks = 5
+The filesystem on /dev/mapper/ubuntu--vg-ubuntu--lv is now 9960448 (4k) blocks long.
+
+/dev/mapper/ubuntu--vg-ubuntu--lv   38G  9,9G   26G  28% /
+== Swap 4 Go ==
+mkswap: /swap.img: warning: wiping old swap signature.
+NAME      TYPE SIZE USED PRIO
+/swap.img file   4G   0B   -2
+== Hostname et /etc/hosts ==
+== Réseau ==
+== machine-id et clés hôte SSH ==
+Initializing machine ID from random generator.
+ssh-keygen: generating new host keys: RSA DSA ECDSA ED25519 
+PERSO_OK host=gitlab ip=192.168.100.50/24 machine-id=7a53fe7e21664e508b8d7e3a4d06bbbd
+== Attente de gitlab sur .50 ==
+Warning: Permanently added '192.168.100.50' (ED25519) to the list of known hosts.
+gitlab
+ens33            UP             192.168.100.50/24 fe80::20c:29ff:fe01:a1c2/64 
+ens37            UP             192.168.232.145/24 metric 100 fe80::20c:29ff:fe01:a1cc/64 
+Mem:            3875         308        2985           1         581        3333
+Swap:           4095           0        4095
+/dev/mapper/ubuntu--vg-ubuntu--lv   38G   11G   26G  29% /
+== RedÃ©marrage de VM1 ==
+Warning: Permanently added '192.168.100.10' (ED25519) to the list of known hosts.
+serveurs1
+P5_GITLAB_VM_OK

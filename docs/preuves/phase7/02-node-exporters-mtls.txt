@@ -1,0 +1,26 @@
+﻿terraform apply : 4 s ; instance dgsn-app-1 ; IP flottante 192.168.100.220
+docker 20.10.24+dfsg1
+=== jacques1@192.168.100.40 (node-controller)
+System.Management.Automation.RemoteException
+Running kernel seems to be up-to-date.
+System.Management.Automation.RemoteException
+No services need to be restarted.
+System.Management.Automation.RemoteException
+No containers need to be restarted.
+System.Management.Automation.RemoteException
+No user sessions are running outdated binaries.
+System.Management.Automation.RemoteException
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Job for prometheus-node-exporter.service failed because the control process exited with error code.
+See "systemctl status prometheus-node-exporter.service" and "journalctl -xeu prometheus-node-exporter.service" for details.
+=== debian@192.168.100.220 (node-app)
+active
+node_exporter, version 1.5.0 (branch: debian/sid, revision: 1.5.0-1+b6)
+HTTPS sans certificat client : code '000' (attendu : 000 = handshake refusé)
+HTTP clair : code '400' (attendu : 400 ou 000)
+bash: -c: line 1: syntax error near unexpected token `('
+bash: -c: line 1: `sudo systemctl disable --now node-exporter.service 2>&1 | tail -1; sudo systemctl reset-failed prometheus-node-exporter; sudo systemctl restart prometheus-node-exporter; sleep 2; systemctl is-active prometheus-node-exporter; c=\$(curl -sk -o /dev/null -w '%{http_code}' https://127.0.0.1:9100/metrics || true); echo "HTTPS sans certificat client : code \$c"; sudo ss -ltnp | grep ':9100''
+Removed "/etc/systemd/system/multi-user.target.wants/node-exporter.service".
+prometheus-node-exporter : active
+HTTPS sans certificat client : code '000' (attendu 000)
+*:9100 users:(("prometheus-node",pid=2158524,fd=3))

@@ -1,0 +1,15 @@
+﻿terraform apply : 25 s (Apply complete! Resources: 33 added, 0 changed, 0 destroyed.)
+app-1                      : ok=11   changed=8    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+bastion-1                  : ok=7    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+db-1                       : ok=7    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-1                      : ok=11   changed=8    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-2                      : ok=11   changed=8    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+ansible-playbook : 128 s (rc=0)
+TOTAL apply + configuration : 153 s (2 min 33 s)
+PASS  Ansible sans erreur sur les 5 instances
+PASS  durée 153 s < 600 s
+== Tests ==
+PASS  5 instances ACTIVE
+PASS  HTTP web-1 (192.168.100.216) : DGSN Theme11 - web-1 (web)
+PASS  SSH direct vers web-1 (192.168.100.216) refusé : accès uniquement via bastion
+PASS  HTTP web-2 (192.168.100.209) : DGSN Theme11 - web-2 (web)

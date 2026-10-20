@@ -1,0 +1,22 @@
+﻿== Paquet vault (dépôt HashiCorp signé) ==
+Vault v2.2.0 (2891bfd23893ebd302307050edaf03d871ea8351), built 2026-10-14T15:24:08Z
+== TLS et configuration ==
+vault joignable (code status=2)
+== Initialisation (lab : 1 part / seuil 1 ; production : 5/3 + auto-unseal HSM) ==
+{"initialized":true,"sealed":false,"version":"2.2.0","storage_type":"raft"}
+P6_VAULT_INSTALL_OK
+  /opt/vault/tls:
+  total 20
+  -rw-r--r-- 1 vault vault  863 oct.  18 23:12 dgsn-root-ca.crt
+  -rw------- 1 vault vault 1850 oct.  18 23:11 tls.crt
+  -rw------- 1 vault vault 3272 oct.  18 23:11 tls.key
+  -rw-r--r-- 1 vault vault  895 oct.  18 23:12 vault.crt
+  -rw------- 1 vault vault  241 oct.  18 23:11 vault.key
+  
+  /root/.dgsn:
+  total 20
+  -rw------- 1 root root 411 oct.  18 21:16 deploy_ed25519
+  -rw------- 1 root root  96 oct.  18 21:16 deploy_ed25519.pub
+  -rw------- 1 root root  52 oct.  18 21:16 gitlab-pat
+  -rw------- 1 root root   2 oct.  18 23:00 project-id
+  -rw------- 1 root root 391 oct.  18 23:12 vault-init.json

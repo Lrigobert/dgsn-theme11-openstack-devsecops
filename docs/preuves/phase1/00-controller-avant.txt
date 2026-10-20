@@ -1,0 +1,44 @@
+﻿NAME                      MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0                       7:0    0  63,8M  1 loop /snap/core20/2866
+loop1                       7:1    0  63,8M  1 loop /snap/core20/2922
+loop2                       7:2    0    74M  1 loop /snap/core22/2411
+loop3                       7:3    0    74M  1 loop /snap/core22/2437
+loop4                       7:4    0 115,1M  1 loop /snap/lxd/40115
+loop5                       7:5    0 115,3M  1 loop /snap/lxd/40575
+loop6                       7:6    0  50,1M  1 loop /snap/snapd/27406
+loop7                       7:7    0  50,3M  1 loop /snap/snapd/27738
+sda                         8:0    0   120G  0 disk 
+├─sda1                      8:1    0     1M  0 part 
+├─sda2                      8:2    0     2G  0 part /boot
+└─sda3                      8:3    0    38G  0 part 
+  └─ubuntu--vg-ubuntu--lv 253:0    0    19G  0 lvm  /
+sr0                        11:0    1  1024M  0 rom  
+---
+  PV         VG        Fmt  Attr PSize   PFree 
+  /dev/sda3  ubuntu-vg lvm2 a--  <38,00g 19,00g
+  VG        #PV #LV #SN Attr   VSize   VFree 
+  ubuntu-vg   1   1   0 wz--n- <38,00g 19,00g
+  LV        VG        Attr       LSize   Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  ubuntu-lv ubuntu-vg -wi-ao---- <19,00g                                                    
+---
+ssh : awk: cmd. line:1: {print \$2, \$(NF-2)}
+Au caractère Ligne:2 : 1
++ ssh -o BatchMode=yes jacques1@192.168.100.10 "lsblk; echo ---; sudo p ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (awk: cmd. line:1: {print \$2, \$(NF-2)}:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+awk: cmd. line:1:        ^ backslash not last character on line
+awk: cmd. line:1: {print \$2, \$(NF-2)}
+awk: cmd. line:1:        ^ syntax error
+---
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens33            UP             192.168.100.10/24 192.168.100.130/24 metric 100 fe80::20c:29ff:fe01:2cf3/64 
+ens37            UP             192.168.232.135/24 metric 100 fe80::20c:29ff:fe01:2cfd/64 
+ens38            DOWN           
+---
+00-installer-config.yaml
+01-routes.yaml
+50-cloud-init.yaml
+bf4e0a5c30e041229e775e53925a9a39
+Ubuntu 22.04.5 LTS

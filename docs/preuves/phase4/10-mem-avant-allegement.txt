@@ -1,0 +1,18 @@
+﻿== AVANT-allegement — 2026-10-18T19:17:05+00:00 ==
+               total        used        free      shared  buff/cache   available
+Mem:           11913        8254        2745          73        1318        3659
+Swap:           3874           0        3874
+conteneurs=33  memoire_conteneurs_Mo=7248  disponible_Mo=3748
+ksm_run=0 pages_sharing=0 gain_Mo=0
+horizon 500MiB / 11.63GiB
+nova_conductor 267MiB / 11.63GiB
+nova_api 640.2MiB / 11.63GiB
+keystone 590.4MiB / 11.63GiB
+nova_metadata 545.5MiB / 11.63GiB
+neutron_dhcp_agent 448.6MiB / 11.63GiB
+neutron_l3_agent 444.2MiB / 11.63GiB
+neutron_server 439.6MiB / 11.63GiB
+placement_api 390.1MiB / 11.63GiB
+heat_api 378.1MiB / 11.63GiB
+heat_api_cfn 373.3MiB / 11.63GiB
+mariadb 290.2MiB / 11.63GiB

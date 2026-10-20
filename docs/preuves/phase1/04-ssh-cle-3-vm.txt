@@ -1,0 +1,3 @@
+﻿jacques1@192.168.100.40 -> controller SUDO_OK
+jacques1@192.168.100.10 -> serveurs1 SUDO_OK
+jacques4@192.168.100.30 -> serveur4 SUDO_OK

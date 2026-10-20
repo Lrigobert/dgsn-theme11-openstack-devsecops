@@ -1,0 +1,20 @@
+﻿== APRES-allegement — 2026-10-18T19:28:25+00:00 ==
+               total        used        free      shared  buff/cache   available
+Mem:           11913        4393        6367          66        1551        7520
+Swap:           3874           0        3874
+conteneurs=29  memoire_conteneurs_Mo=4114  disponible_Mo=7505
+ksm_run=0 pages_sharing=0 gain_Mo=0
+nova_novncproxy 111MiB / 11.63GiB
+cron 900KiB / 11.63GiB
+neutron_l3_agent 439.4MiB / 11.63GiB
+neutron_dhcp_agent 337.1MiB / 11.63GiB
+neutron_openvswitch_agent 276.9MiB / 11.63GiB
+neutron_server 264.1MiB / 11.63GiB
+nova_compute 191.7MiB / 11.63GiB
+keystone 186.7MiB / 11.63GiB
+nova_api 144.3MiB / 11.63GiB
+mariadb 144.3MiB / 11.63GiB
+rabbitmq 137.6MiB / 11.63GiB
+horizon 130.8MiB / 11.63GiB
+ERROR 1045 (28000): Access denied for user 'mysql'@'controller' (using password: NO)
+3

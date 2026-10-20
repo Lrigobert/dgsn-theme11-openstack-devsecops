@@ -1,0 +1,3 @@
+﻿Warning: Permanently added '192.168.100.40' (ED25519) to the list of known hosts.
+bash: -c: line 1: syntax error near unexpected token `('
+bash: -c: line 1: `echo HOST=\$(hostname); ip -br a; ip route; df -h / | tail -1; cat /etc/machine-id; grep -c '^127.0.1.1' /etc/hosts; cat /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg; sudo -n true && echo SUDO_OK; ping -c2 -W2 192.168.100.1 | tail -1; ping -c2 -W2 8.8.8.8 | tail -1; getent hosts archive.ubuntu.com | head -1'

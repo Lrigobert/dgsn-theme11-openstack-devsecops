@@ -1,0 +1,19 @@
+﻿== Jeton d'automatisation (PAT root, 30 jours, portée api) ==
+PAT OK pour root
+== Runner Docker (exécuteur docker, socket hôte, concurrence 1) ==
+Runtime platform                                  [0;m  arch[0;m=amd64 os[0;m=linux pid[0;m=26057 revision[0;m=70f5c12d version[0;m=19.5.0
+Running in system-mode.                           [0;m 
+                                                  [0;m 
+Verifying runner... is valid                      [0;m  correlation_id[0;m=01M58DYCCM8J3DCGG4AK4RJ96A runner[0;m=ZvAX6ERYW runner_name[0;m=dgsn-docker
+Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
+[0;m 
+Configuration (with the authentication token) was saved in "/etc/gitlab-runner/config.toml"[0;m 
+Listing configured runners                        [0;m  ConfigFile[0;m=/etc/gitlab-runner/config.toml
+dgsn-docker                                       [0;m  Executor[0;m=docker Token[0;m=[SECRET] URL[0;m=http://192.168.100.50
+concurrent = 1
+  executor = "docker"
+    volumes = ["/var/run/docker.sock:/var/run/docker.sock", "/cache"]
+== Clé SSH de déploiement CI ==
+== Groupe et projet ==
+groupe=2 projet=1
+P5_CI_SETUP_OK

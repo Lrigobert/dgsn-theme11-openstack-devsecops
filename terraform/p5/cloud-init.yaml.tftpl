@@ -1,0 +1,26 @@
+#cloud-config
+hostname: dgsn-app-1
+timezone: Africa/Casablanca
+ssh_pwauth: false
+disable_root: true
+ssh_authorized_keys:
+  - ${admin_key}
+package_update: true
+packages:
+  - docker.io
+  - curl
+write_files:
+  - path: /etc/docker/daemon.json
+    content: |
+      { "insecure-registries": ["192.168.100.50:5050"], "log-driver": "json-file",
+        "log-opts": {"max-size": "10m", "max-file": "3"}, "no-new-privileges": true }
+  - path: /etc/ssh/sshd_config.d/10-dgsn.conf
+    content: |
+      PasswordAuthentication no
+      PermitRootLogin no
+      MaxAuthTries 3
+runcmd:
+  - [ systemctl, enable, --now, docker ]
+  - [ systemctl, restart, docker ]
+  - [ systemctl, restart, ssh ]
+  - [ sh, -c, 'date -Is > /var/lib/dgsn-cloud-init-done' ]

@@ -1,0 +1,5 @@
+﻿== Affectations ==
+admin dgsn-ops-admin@Default dgsn-ops@Default
+member dgsn-pj-member@Default dgsn-pj@Default
+reader dgsn-id-reader@Default dgsn-identification@Default
+P3_RBAC_OK

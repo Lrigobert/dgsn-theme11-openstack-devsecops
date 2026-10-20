@@ -1,0 +1,26 @@
+---
+# Phase 8 — complément de remédiation : règle de sévérité « high » restante corrigible.
+# no_empty_passwords_unix : retirer l'option « nullok » de pam_unix (mots de passe vides refusés).
+- name: Complément CIS (sévérité high)
+  hosts: scap
+  become: true
+  tasks:
+    - name: Supprimer nullok des fichiers PAM communs
+      ansible.builtin.replace:
+        path: "/etc/pam.d/{{ item }}"
+        regexp: '\s+nullok(_secure)?\b'
+        replace: ''
+      loop: [common-auth, common-password, common-account, common-session]
+      failed_when: false
+
+    - name: Vérification ciblée OpenSCAP de la règle
+      ansible.builtin.command: >
+        oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis_level1_server
+        --rule xccdf_org.ssgproject.content_rule_no_empty_passwords_unix /opt/ssg/ssg-debian12-ds.xml
+      register: chk
+      failed_when: false
+      changed_when: false
+
+    - name: Résultat
+      ansible.builtin.debug:
+        msg: "{{ chk.stdout_lines | select('search', 'Result') | list }}"

@@ -1,0 +1,32 @@
+﻿Ubuntu 24.04.5 LTS
+6.8.0-147-generic
+Python 3.12.3
+hostname=controller  machine-id=71ea1c0379cc4d07976f02741b41327e
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+ens33            UP             192.168.100.40/24 fe80::20c:29ff:fe01:2cf3/64 
+ens37            UP             192.168.232.135/24 metric 100 fe80::20c:29ff:fe01:2cfd/64 
+ens38            UP             
+default via 192.168.232.2 dev ens37 proto dhcp src 192.168.232.135 metric 100 
+192.168.10.0/24 via 192.168.100.254 dev ens33 proto static 
+192.168.20.0/24 via 192.168.100.254 dev ens33 proto static 
+192.168.30.0/24 via 192.168.100.254 dev ens33 proto static 
+192.168.100.0/24 dev ens33 proto kernel scope link src 192.168.100.40 
+192.168.110.0/24 via 192.168.100.254 dev ens33 proto static 
+192.168.120.0/24 via 192.168.100.254 dev ens33 proto static 
+192.168.232.0/24 dev ens37 proto kernel scope link src 192.168.232.135 metric 100 
+192.168.232.2 dev ens37 proto dhcp scope link src 192.168.232.135 metric 100 
+/dev/mapper/ubuntu--vg-ubuntu--lv  116G  9,8G  102G   9% /
+PASS  hostname = controller
+PASS  ens33 = 192.168.100.40/24 seule IP v4
+PASS  ens37 en DHCP (192.168.232.x)
+PASS  ens38 UP sans IPv4
+PASS  une seule route par défaut (NAT)
+PASS  cloud-init réseau désactivé
+PASS  / >= 100 Go
+PASS  /etc/hosts sans 127.0.1.1
+PASS  machine-id régénéré (≠ VM1)
+PASS  sudo NOPASSWD
+PASS  pfSense joignable
+PASS  Internet joignable (8.8.8.8)
+PASS  DNS (archive.ubuntu.com)
+P1_CONTROLLER_PASS

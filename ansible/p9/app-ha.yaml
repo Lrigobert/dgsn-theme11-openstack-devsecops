@@ -1,0 +1,52 @@
+# Application répliquée sur les 3 nœuds (1 réplique par nœud), exposée en NodePort 30080.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dgsn-whoami
+  labels: {app: dgsn-whoami}
+spec:
+  replicas: 3
+  selector:
+    matchLabels: {app: dgsn-whoami}
+  template:
+    metadata:
+      labels: {app: dgsn-whoami}
+    spec:
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels: {app: dgsn-whoami}
+      # Replanification rapide si un nœud devient injoignable (défaut : 300 s)
+      tolerations:
+        - {key: node.kubernetes.io/unreachable, operator: Exists, effect: NoExecute, tolerationSeconds: 5}
+        - {key: node.kubernetes.io/not-ready, operator: Exists, effect: NoExecute, tolerationSeconds: 5}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+      containers:
+        - name: whoami
+          image: __WHOAMI_IMAGE__
+          args: ["--port", "8080"]
+          ports: [{containerPort: 8080}]
+          readinessProbe:
+            httpGet: {path: /health, port: 8080}
+            periodSeconds: 2
+          resources:
+            requests: {cpu: 20m, memory: 16Mi}
+            limits: {cpu: 200m, memory: 64Mi}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dgsn-whoami
+spec:
+  type: NodePort
+  selector: {app: dgsn-whoami}
+  ports:
+    - {port: 80, targetPort: 8080, nodePort: 30080}

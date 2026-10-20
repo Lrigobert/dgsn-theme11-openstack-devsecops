@@ -1,0 +1,107 @@
+---
+# Phase 9 — cluster k3s 3 nœuds (1 serveur, 2 agents) sur instances OpenStack Debian 12.
+# Binaire k3s vérifié par SHA256 (release GitHub épinglée). Composants non utilisés désactivés (RAM).
+# Détection de panne accélérée pour viser une reprise < 30 s :
+#   kube-controller-manager node-monitor-grace-period 10s (défaut 40s), node-monitor-period 2s ;
+#   kubelet node-status-update-frequency 2s (défaut 10s).
+- name: Attente de la joignabilité SSH (démarrage qemu)
+  hosts: k3s
+  gather_facts: false
+  tasks:
+    - name: Attendre SSH
+      ansible.builtin.wait_for_connection:
+        delay: 10
+        sleep: 5
+        timeout: 900
+
+- name: Binaire k3s
+  hosts: k3s
+  become: true
+  vars:
+    k3s_version: "{{ lookup('env', 'K3S_VERSION') }}"
+    base: "https://github.com/k3s-io/k3s/releases/download/{{ k3s_version | urlencode }}"
+  tasks:
+    - name: Attendre cloud-init
+      ansible.builtin.wait_for:
+        path: /var/lib/dgsn-cloud-init-done
+        timeout: 900
+    - name: Sommes de contrôle de la release
+      ansible.builtin.get_url:
+        url: "{{ base }}/sha256sum-amd64.txt"
+        dest: /tmp/k3s-sha256.txt
+        mode: "0644"
+    - name: Somme attendue du binaire
+      ansible.builtin.shell: awk '$2=="k3s" {print $1}' /tmp/k3s-sha256.txt
+      register: sum
+      changed_when: false
+    - name: Binaire k3s (vérifié)
+      ansible.builtin.get_url:
+        url: "{{ base }}/k3s"
+        dest: /usr/local/bin/k3s
+        mode: "0755"
+        checksum: "sha256:{{ sum.stdout }}"
+    - name: Script d'installation de la même version
+      ansible.builtin.get_url:
+        url: "https://raw.githubusercontent.com/k3s-io/k3s/{{ k3s_version | urlencode }}/install.sh"
+        dest: /usr/local/bin/k3s-install.sh
+        mode: "0755"
+
+- name: Serveur k3s
+  hosts: k3s_server
+  become: true
+  tasks:
+    - name: Installation du serveur
+      ansible.builtin.command: /usr/local/bin/k3s-install.sh
+      args:
+        creates: /etc/systemd/system/k3s.service
+      environment:
+        INSTALL_K3S_SKIP_DOWNLOAD: "true"
+        INSTALL_K3S_EXEC: >-
+          server --disable traefik --disable servicelb --disable metrics-server --disable local-storage
+          --node-ip {{ private_ip }} --write-kubeconfig-mode 600
+          --kube-controller-manager-arg=node-monitor-grace-period=10s
+          --kube-controller-manager-arg=node-monitor-period=2s
+          --kubelet-arg=node-status-update-frequency=2s
+    - name: Attendre le jeton de jonction
+      ansible.builtin.wait_for:
+        path: /var/lib/rancher/k3s/server/node-token
+        timeout: 600
+    - name: Lire le jeton (reste en mémoire Ansible, jamais affiché)
+      ansible.builtin.slurp:
+        src: /var/lib/rancher/k3s/server/node-token
+      register: token
+      no_log: true
+
+- name: Agents k3s
+  hosts: k3s_agent
+  become: true
+  tasks:
+    - name: Installation des agents
+      ansible.builtin.command: /usr/local/bin/k3s-install.sh
+      args:
+        creates: /etc/systemd/system/k3s-agent.service
+      environment:
+        INSTALL_K3S_SKIP_DOWNLOAD: "true"
+        K3S_URL: "https://{{ hostvars[groups['k3s_server'][0]].private_ip }}:6443"
+        K3S_TOKEN: "{{ hostvars[groups['k3s_server'][0]].token.content | b64decode | trim }}"
+        INSTALL_K3S_EXEC: "agent --node-ip {{ private_ip }} --kubelet-arg=node-status-update-frequency=2s"
+      no_log: true
+
+- name: Vérification du cluster
+  hosts: k3s_server
+  become: true
+  tasks:
+    - name: Trois nœuds Ready
+      ansible.builtin.shell: k3s kubectl get nodes --no-headers | awk '$2=="Ready"' | wc -l
+      register: ready
+      until: ready.stdout | int == 3
+      retries: 60
+      delay: 10
+      changed_when: false
+    - name: Nœuds
+      ansible.builtin.command: k3s kubectl get nodes -o wide
+      register: nodes
+      changed_when: false
+    - name: Afficher
+      ansible.builtin.debug:
+        var: nodes.stdout_lines

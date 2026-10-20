@@ -1,0 +1,13 @@
+# Généré par Terraform (terraform/p4) — accès SSH via le bastion uniquement
+Host ${bastion}
+  User debian
+  IdentityFile ~/.ssh/id_ed25519
+  UserKnownHostsFile ~/.ssh/known_hosts_p4
+  StrictHostKeyChecking accept-new
+
+Host ${cidr_glob}
+  User debian
+  IdentityFile ~/.ssh/id_ed25519
+  ProxyJump ${bastion}
+  UserKnownHostsFile ~/.ssh/known_hosts_p4
+  StrictHostKeyChecking accept-new

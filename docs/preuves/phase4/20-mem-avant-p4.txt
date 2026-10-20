@@ -1,0 +1,6 @@
+﻿== AVANT-P4-0-instance — 2026-10-18T20:28:08+00:00 ==
+               total        used        free      shared  buff/cache   available
+Mem:           11913        4775        5867          66        1669        7138
+Swap:           3874           0        3874
+conteneurs=29  memoire_conteneurs_Mo=4491  disponible_Mo=7151
+ksm_run=1 pages_sharing=0 gain_Mo=0

@@ -1,0 +1,24 @@
+  # DGSN-THEME11 BEGIN — jobs ajoutés en phase 7 (le reste du fichier est la configuration existante de VM4)
+  - job_name: 'dgsn-openstack'
+    scrape_interval: 60s
+    scrape_timeout: 50s
+    static_configs:
+      - targets: ['127.0.0.1:9180']
+        labels:
+          cloud: 'dgsn-openstack-2025.1'
+  - job_name: 'dgsn-node-mtls'
+    scheme: https
+    tls_config:
+      ca_file: /etc/prometheus/dgsn-tls/dgsn-root-ca.crt
+      cert_file: /etc/prometheus/dgsn-tls/prometheus-client.crt
+      key_file: /etc/prometheus/dgsn-tls/prometheus-client.key
+    static_configs:
+      - targets: ['192.168.100.40:9100']
+        labels:
+          vm: 'controller'
+          role: 'openstack-controller-compute'
+      - targets: ['192.168.100.220:9100']
+        labels:
+          vm: 'dgsn-app-1'
+          role: 'instance-openstack'
+  # DGSN-THEME11 END

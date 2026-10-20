@@ -1,0 +1,3 @@
+﻿terraform apply : 23 s ; instance dgsn-app-1 ; IP flottante 192.168.100.220
+docker 20.10.24+dfsg1
+prête après 298 s

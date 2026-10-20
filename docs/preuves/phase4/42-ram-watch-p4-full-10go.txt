@@ -1,0 +1,35 @@
+﻿22:51:14 hote=9,1Go vmx_controller=7,8Go controller_dispo=5229Mo ksm=0Mo
+22:51:30 hote=9,2Go vmx_controller=7,8Go controller_dispo=4825Mo ksm=13Mo
+22:51:46 hote=6,9Go vmx_controller=10,3Go controller_dispo=2178Mo ksm=96Mo
+22:52:02 hote=5,7Go vmx_controller=11,6Go controller_dispo=841Mo ksm=383Mo
+22:52:18 hote=5,7Go vmx_controller=11,7Go controller_dispo=724Mo ksm=587Mo
+22:52:34 hote=5,3Go vmx_controller=12,8Go controller_dispo=313Mo ksm=618Mo
+22:52:49 hote=5,1Go vmx_controller=13,6Go controller_dispo=354Mo ksm=623Mo
+22:53:06 hote=5,5Go vmx_controller=13,7Go controller_dispo=359Mo ksm=700Mo
+22:53:22 hote=5,3Go vmx_controller=14,1Go controller_dispo=428Mo ksm=754Mo
+22:53:38 hote=5,6Go vmx_controller=14,1Go controller_dispo=848Mo ksm=804Mo
+22:53:54 hote=5,4Go vmx_controller=14,1Go controller_dispo=889Mo ksm=808Mo
+22:54:10 hote=5,6Go vmx_controller=14,1Go controller_dispo=6994Mo ksm=0Mo
+22:54:26 hote=5,4Go vmx_controller=14,1Go controller_dispo=6914Mo ksm=0Mo
+22:54:42 hote=5,3Go vmx_controller=14,1Go controller_dispo=6111Mo ksm=20Mo
+22:54:57 hote=5,2Go vmx_controller=14,3Go controller_dispo=3409Mo ksm=168Mo
+22:55:14 hote=5,1Go vmx_controller=14,4Go controller_dispo=2648Mo ksm=513Mo
+22:55:29 hote=5,1Go vmx_controller=14,4Go controller_dispo=2384Mo ksm=653Mo
+22:55:45 hote=5,1Go vmx_controller=14,4Go controller_dispo=1432Mo ksm=738Mo
+22:56:01 hote=4,9Go vmx_controller=14,5Go controller_dispo=579Mo ksm=749Mo
+22:56:18 hote=5,0Go vmx_controller=14,6Go controller_dispo=488Mo ksm=767Mo
+22:56:33 hote=4,8Go vmx_controller=14,7Go controller_dispo=440Mo ksm=825Mo
+22:56:50 hote=5,0Go vmx_controller=14,9Go controller_dispo=440Mo ksm=872Mo
+22:57:05 hote=4,7Go vmx_controller=14,9Go controller_dispo=817Mo ksm=885Mo
+22:57:22 hote=4,7Go vmx_controller=14,9Go controller_dispo=750Mo ksm=892Mo
+22:57:37 hote=4,6Go vmx_controller=14,9Go controller_dispo=7158Mo ksm=0Mo
+2026-10-18T20:51:15+00:00 START apply-1
+2026-10-18T20:54:04+00:00 PASS  apply-1
+2026-10-18T20:54:04+00:00 START destroy-1
+2026-10-18T20:54:18+00:00 PASS  destroy-1
+2026-10-18T20:54:18+00:00 START apply-2
+2026-10-18T20:57:25+00:00 PASS  apply-2
+2026-10-18T20:57:25+00:00 START destroy-2
+2026-10-18T20:57:38+00:00 PASS  destroy-2
+2026-10-18T20:57:38+00:00 P4_FULL_DONE
+MIN hote 4,6 Go (seuil 2 Go)

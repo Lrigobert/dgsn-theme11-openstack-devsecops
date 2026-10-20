@@ -1,0 +1,10 @@
+﻿2
+dgsn-root-ca.crt
+prometheus-client.crt
+prometheus-client.key
+Checking /tmp/prom-check.yml
+  SUCCESS: 0 rule files found
+
+dgsn-node-mtls   192.168.100.40:9100      up    
+dgsn-node-mtls   192.168.100.220:9100     up    
+dgsn-openstack   127.0.0.1:9180           up    

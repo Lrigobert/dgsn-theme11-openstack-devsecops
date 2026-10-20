@@ -1,0 +1,7 @@
+﻿/home/jacques1/dgsn/scripts/p9-restore.sh: line 1: ﻿#!/usr/bin/env: No such file or directory
+témoin écrit sur rst-src : DGSN-1792460408-15936
+snapshot Glance : 16 s (1047 Mo)
+instance source supprimée (incident simulé) à 2026-10-20T01:40:31+00:00
+témoin lu sur rst-restored : DGSN-1792460408-15936
+RTO (restauration depuis snapshot jusqu'au service SSH + donnée vérifiée) : 61 s
+P9_RESTORE_PASS

@@ -1,0 +1,30 @@
+﻿local_file.ssh_config: Creation complete after 0s [id=305c75fb0cbc631bd9681b47a815f9bbd3f5f04c]
+local_file.inventory: Creation complete after 0s [id=f9777765717c247d57e6af03cc1fabba10b492ba]
+openstack_networking_floatingip_v2.fip["web-1"]: Creation complete after 2s [id=8a73f211-4c13-441a-9e81-6e0f94a842d2]
+openstack_compute_instance_v2.vm["web-2"]: Still creating... [00m10s elapsed]
+openstack_compute_instance_v2.vm["bastion-1"]: Still creating... [00m10s elapsed]
+openstack_compute_instance_v2.vm["db-1"]: Still creating... [00m10s elapsed]
+openstack_compute_instance_v2.vm["app-1"]: Still creating... [00m10s elapsed]
+openstack_compute_instance_v2.vm["web-1"]: Still creating... [00m10s elapsed]
+openstack_compute_instance_v2.vm["web-2"]: Still creating... [00m20s elapsed]
+openstack_compute_instance_v2.vm["bastion-1"]: Still creating... [00m20s elapsed]
+openstack_compute_instance_v2.vm["db-1"]: Still creating... [00m20s elapsed]
+openstack_compute_instance_v2.vm["web-1"]: Still creating... [00m20s elapsed]
+openstack_compute_instance_v2.vm["app-1"]: Still creating... [00m20s elapsed]
+openstack_compute_instance_v2.vm["db-1"]: Creation complete after 22s [id=71290309-2c83-48ef-96b0-b86cc303a5b5]
+openstack_compute_instance_v2.vm["web-2"]: Still creating... [00m30s elapsed]
+openstack_compute_instance_v2.vm["bastion-1"]: Still creating... [00m30s elapsed]
+openstack_compute_instance_v2.vm["app-1"]: Still creating... [00m30s elapsed]
+openstack_compute_instance_v2.vm["web-1"]: Still creating... [00m30s elapsed]
+openstack_compute_instance_v2.vm["web-1"]: Creation complete after 31s [id=c87a02e8-fd45-4d50-a327-4dac80c27598]
+openstack_compute_instance_v2.vm["app-1"]: Creation complete after 31s [id=7a743c93-711d-492c-af15-69381a5e91f1]
+openstack_compute_instance_v2.vm["bastion-1"]: Creation complete after 31s [id=cb849711-7e8d-4a69-a983-eaf199b9e95d]
+
+Error: Error waiting for instance (a4eecb25-126c-49ba-9016-61b215712536) to become ready: Expected HTTP response code [200 203] when accessing [GET http://192.168.100.45:8774/v2.1/servers/a4eecb25-126c-49ba-9016-61b215712536], but got 408 instead: <html><body><h1>408 Request Time-out</h1>
+Your browser didn't send a complete request in time.
+</body></html>
+
+  with openstack_compute_instance_v2.vm["web-2"],
+  on main.tf line 87, in resource "openstack_compute_instance_v2" "vm":
+  87: resource "openstack_compute_instance_v2" "vm" {
+
